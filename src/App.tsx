@@ -12,6 +12,7 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { CookiePreferencesModal } from './components/CookiePreferencesModal';
 import { PrivacyRightsModal } from './components/PrivacyRightsModal';
 import { GlobalLogoWallpaper } from './components/GlobalLogoWallpaper';
+import { PerformanceSeoAudit } from './components/PerformanceSeoAudit';
 import { GoldMouseSpotlight } from './components/GoldMouseSpotlight';
 import { Zap, MessageSquare } from 'lucide-react';
 
@@ -265,6 +266,9 @@ function MainLayout() {
           setIsCookiePreferencesOpen(true);
         }}
       />
+
+      {/* Lightweight Concurrency Performance Monitor & SEO Meta Audit */}
+      <PerformanceSeoAudit />
     </>
   );
 }
