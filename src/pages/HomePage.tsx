@@ -38,7 +38,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenIntake }) => {
       name: 'ALABSGOLD Studio',
       url: 'https://alabsgold.com.ng',
       email: 'hello@alabsgold.com.ng',
-      telephone: '+2348100345062',
+      telephone: '+2347039960964',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Lagos',

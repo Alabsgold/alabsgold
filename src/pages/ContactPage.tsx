@@ -330,7 +330,7 @@ export const ContactPage: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs font-mono uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2"
               >
-                <span>Message +234 810 034 5062</span>
+                <span>Message {STUDIO_DATA.phone}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
               <p className="text-[11px] font-mono text-zinc-500 text-center">

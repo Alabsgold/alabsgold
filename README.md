@@ -147,8 +147,8 @@ Generates optimized, treeshaken static assets in the `dist/` directory.
 
 * **Founder & Lead Engineer:** Alabi Emmanuel (Alabsgold)
 * **Direct Studio Email:** [hello@alabsgold.com.ng](mailto:hello@alabsgold.com.ng)
-* **Secondary Email:** [alabifemigold31@gmail.com](mailto:alabifemigold31@gmail.com)
-* **WhatsApp Intake:** [+234 810 034 5062](https://wa.me/2348100345062?text=Hi%20Emmanuel,%20I%20saw%20the%20ALABSGOLD%20site%20and%20I'd%20like%20to%20discuss%20a%20project.)
+* **Personal / Secondary Email:** [emmaalabi31@gmail.com](mailto:emmaalabi31@gmail.com)
+* **WhatsApp Intake:** [+234 703 996 0964 (07039960964)](https://wa.me/2347039960964?text=Hi%20Emmanuel,%20I%20saw%20the%20ALABSGOLD%20site%20and%20I'd%20like%20to%20discuss%20a%20project.)
 * **Studio Base:** Lagos, Nigeria (WAT / GMT+1) · Available for worldwide client engagements
 
 ---
