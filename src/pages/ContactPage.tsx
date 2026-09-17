@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useSEO } from '../hooks/useSEO';
 import { FOUNDER_DATA, FAQS, STUDIO_DATA, AUTHENTIC_PRICING_TIERS } from '../data/content';
 import {
   Mail,
@@ -18,6 +19,27 @@ import {
 } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
+  useSEO({
+    title: 'Contact Us & Project Intake | ALABSGOLD',
+    description:
+      'Start a project with ALABSGOLD. Direct engineering intake with Founder Alabi Emmanuel. Guaranteed 24-hour response SLA (Monday through Saturday).',
+    keywords: [
+      'Contact ALABSGOLD',
+      'Hire Web Engineer Lagos',
+      'Digital Infrastructure Scoping',
+      'Alabi Emmanuel WhatsApp',
+      'Custom Software Intake',
+    ],
+    canonicalPath: '/contact',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact ALABSGOLD Studio',
+      description: 'Project intake and direct founder communication desk.',
+      url: 'https://alabsgold.com.ng/contact',
+    },
+  });
+
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [faqCategory, setFaqCategory] = useState<string>('All');
   const [openFaqId, setOpenFaqId] = useState<string | null>(null);

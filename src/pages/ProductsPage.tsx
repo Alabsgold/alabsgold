@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSEO } from '../hooks/useSEO';
 import {
   SELECTED_WORKS,
   DESIGN_BRAND_WORKS,
@@ -25,6 +26,28 @@ interface ProductsPageProps {
 }
 
 export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenIntake }) => {
+  useSEO({
+    title: 'Selected Works, Platforms & R&D Labs | ALABSGOLD',
+    description:
+      'Explore live production platforms, bespoke Studio CMS implementations, AI quiz engines, and Atlassian Forge apps engineered by ALABSGOLD.',
+    keywords: [
+      'ALABSGOLD Portfolio',
+      'Kadie Fresh Platform',
+      'PrepAI LangChain',
+      'Atlassian Forge Apps',
+      'PrepCBT Platform',
+      'Web Engineering Case Studies',
+    ],
+    canonicalPath: '/products',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'ALABSGOLD Selected Works & Engineered Platforms',
+      description: 'Production platforms, software architectures, and AI systems built by ALABSGOLD.',
+      url: 'https://alabsgold.com.ng/products',
+    },
+  });
+
   const [activeTab, setActiveTab] = useState<'works' | 'design' | 'experiments'>('works');
   const [categoryFilter, setCategoryFilter] = useState<string>('All');
 

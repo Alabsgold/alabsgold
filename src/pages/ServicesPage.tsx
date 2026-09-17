@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSEO } from '../hooks/useSEO';
 import {
   THREE_SERVICE_PILLARS,
   AUTHENTIC_PRICING_TIERS,
@@ -29,6 +30,38 @@ interface ServicesPageProps {
 }
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenIntake }) => {
+  useSEO({
+    title: 'Services & Transparent Pricing | ALABSGOLD',
+    description:
+      'Engineering services and realistic milestone pricing for custom web platforms, export trust infrastructure, AI retrieval systems, and secure cloud backends.',
+    keywords: [
+      'Web Development Services',
+      'Export Platform Pricing',
+      'Custom Software Development Lagos',
+      'Studio Admin CMS',
+      'ALABSGOLD Pricing',
+      'Nigeria Web Engineering',
+    ],
+    canonicalPath: '/services',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      serviceType: 'Digital Infrastructure & Web Engineering',
+      provider: {
+        '@type': 'Organization',
+        name: 'ALABSGOLD',
+        url: 'https://alabsgold.com.ng',
+      },
+      offers: AUTHENTIC_PRICING_TIERS.map((tier) => ({
+        '@type': 'Offer',
+        name: tier.name,
+        description: tier.shortDesc,
+        priceCurrency: 'NGN',
+        price: tier.priceNGN,
+      })),
+    },
+  });
+
   const [selectedPillarId, setSelectedPillarId] = useState<string>(THREE_SERVICE_PILLARS[0].id);
   const [currencyMode, setCurrencyMode] = useState<'NGN' | 'INTL'>('NGN');
 

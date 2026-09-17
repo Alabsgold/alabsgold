@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useSEO } from '../hooks/useSEO';
 import { ABOUT_DATA, STUDIO_DATA, WHAT_WE_DONT_DO } from '../data/content';
 import {
   Building,
@@ -18,6 +19,28 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onOpenIntake }) => {
+  useSEO({
+    title: 'About ALABSGOLD — Digital Infrastructure & Trust Engineering',
+    description:
+      'The mission, philosophy, and architectural invariants behind ALABSGOLD. We engineer trust-critical digital platforms for African and diaspora enterprises.',
+    keywords: [
+      'About ALABSGOLD',
+      'Digital Infrastructure Africa',
+      'Trust Engineering',
+      'Software Architecture Studio',
+      'Alabi Emmanuel Studio',
+      'Anti-Template Philosophy',
+    ],
+    canonicalPath: '/about',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'About ALABSGOLD Studio',
+      description: ABOUT_DATA.mission,
+      url: 'https://alabsgold.com.ng/about',
+    },
+  });
+
   return (
     <div className="pt-28 pb-24 bg-[#09090b] text-[#f4f4f5] min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

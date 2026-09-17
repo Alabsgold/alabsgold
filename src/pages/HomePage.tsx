@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useSEO } from '../hooks/useSEO';
 import { Hero } from '../components/Hero';
 import { ArchitectureSimulator } from '../components/ArchitectureSimulator';
 import { ServicesSection } from '../components/ServicesSection';
@@ -16,6 +17,43 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenIntake }) => {
+  useSEO({
+    title: 'ALABSGOLD — Boutique Web Engineering & Digital Infrastructure Studio',
+    description:
+      'Boutique web engineering studio based in Lagos, Nigeria. We engineer trust-critical digital platforms, export quotation systems, and resilient backend systems for international credibility.',
+    keywords: [
+      'ALABSGOLD',
+      'Web Engineering Studio',
+      'Digital Infrastructure',
+      'Alabi Emmanuel',
+      'Kadie Fresh Platform',
+      'Export Quoting Wizard',
+      'Full Stack Engineer Lagos',
+      'Next.js TypeScript',
+    ],
+    canonicalPath: '/',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: 'ALABSGOLD Studio',
+      url: 'https://alabsgold.com.ng',
+      email: 'hello@alabsgold.com.ng',
+      telephone: '+2348100345062',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Lagos',
+        addressCountry: 'Nigeria',
+      },
+      founder: {
+        '@type': 'Person',
+        name: 'Alabi Emmanuel',
+        jobTitle: 'Founder & Full-Stack Systems Engineer',
+      },
+      description:
+        'Boutique web engineering studio building mission-critical digital infrastructure for businesses serving international clients.',
+    },
+  });
+
   // Top 6 featured works from the 8 selected works
   const topFeaturedWorks = SELECTED_WORKS.slice(0, 6);
 

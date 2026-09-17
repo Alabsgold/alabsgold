@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useSEO } from '../hooks/useSEO';
 import { FOUNDER_DATA, EXPERIENCES_DATA, CERTIFICATIONS_DATA, STUDIO_DATA } from '../data/content';
 import {
   Mail,
@@ -23,6 +24,38 @@ interface FounderPageProps {
 }
 
 export const FounderPage: React.FC<FounderPageProps> = ({ onOpenIntake }) => {
+  useSEO({
+    title: 'Alabi Emmanuel (Alabsgold) — Founder & Systems Engineer | ALABSGOLD',
+    description:
+      'Profile of Alabi Emmanuel (Alabsgold), 300-level Computer Science student, founder of ALABSGOLD, 1st-place NiRA-XT hackathon winner, and full-stack systems engineer.',
+    keywords: [
+      'Alabi Emmanuel',
+      'Alabsgold',
+      'Full Stack Systems Engineer Lagos',
+      'NiRA-XT Winner',
+      'Alluvium SIWES',
+      'Kadie Fresh Founder',
+      'Let’s Learn Py Founder',
+    ],
+    ogType: 'profile',
+    canonicalPath: '/founder',
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: FOUNDER_DATA.name,
+      alternateName: 'Alabsgold',
+      jobTitle: FOUNDER_DATA.role,
+      worksFor: {
+        '@type': 'Organization',
+        name: 'ALABSGOLD',
+      },
+      alumniOf: 'Computer Science Department',
+      email: FOUNDER_DATA.email,
+      url: 'https://alabsgold.com.ng/founder',
+      description: FOUNDER_DATA.title,
+    },
+  });
+
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleCopyEmail = (emailText: string) => {
