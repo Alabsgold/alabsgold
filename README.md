@@ -124,13 +124,15 @@ Generates optimized, treeshaken static assets in the `dist/` directory.
 │   │   ├── Footer.tsx                 # Studio navigation, presence hub, direct desks
 │   │   ├── Hero.tsx                   # Studio headline, verified metrics, proof badges
 │   │   ├── IntakeModal.tsx            # Floating modal for fast project intake scoping
+│   │   ├── InteractiveProjectTimeline.tsx # Framer Motion interactive development stages timeline
 │   │   ├── Navbar.tsx                 # Responsive header with route links and CTA
 │   │   ├── ProcessSection.tsx         # 5-phase delivery breakdown & boundary rules
 │   │   ├── ScrollProgressBar.tsx      # Fixed 2px gold scroll progress indicator
 │   │   ├── ServicesSection.tsx        # 3 service pillars overview
 │   │   └── TechStackSection.tsx       # Filterable battle-tested primitives
 │   ├── data/
-│   │   └── content.ts          # Authentic single-source-of-truth content and records
+│   │   ├── content.ts          # Authentic single-source-of-truth content and records
+│   │   └── timelineData.ts     # Stages, tiers, deliverables & code artifacts for timeline
 │   ├── hooks/
 │   │   └── useSEO.ts           # Dynamic SEO, Open Graph & JSON-LD hook
 │   └── pages/                  # Route-level page components

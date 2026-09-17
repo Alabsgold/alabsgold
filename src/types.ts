@@ -95,6 +95,43 @@ export interface FaqItem {
   tag?: string;
 }
 
+export interface ProjectTimelineStage {
+  id: string;
+  stepNumber: string;
+  name: string;
+  subtitle: string;
+  durations: {
+    starter: string;
+    professional: string;
+    enterprise: string;
+  };
+  summary: string;
+  alabsRule: string;
+  coreFocus: string;
+  deliverables: {
+    title: string;
+    description: string;
+    status: 'Required' | 'Deterministic' | 'Production-Ready';
+  }[];
+  architecturalHighlights: string[];
+  clientTouchpoint: {
+    channel: string;
+    action: string;
+    governanceGate: string;
+  };
+  paymentMilestone?: {
+    percentage: string;
+    label: string;
+    condition: string;
+  };
+  artifact: {
+    fileName: string;
+    language: string;
+    code: string;
+    explanation: string;
+  };
+}
+
 export interface SimulationStep {
   id: string;
   title: string;

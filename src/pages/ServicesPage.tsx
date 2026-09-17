@@ -7,6 +7,7 @@ import {
   NICHE_PRICING_BANDS,
   STUDIO_DATA,
 } from '../data/content';
+import { InteractiveProjectTimeline } from '../components/InteractiveProjectTimeline';
 import {
   ShieldCheck,
   Terminal,
@@ -402,6 +403,15 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onOpenIntake }) => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* INTERACTIVE DIGITAL INFRASTRUCTURE TIMELINE */}
+        <div className="mt-24 border-t border-[#27272a] pt-16">
+          <InteractiveProjectTimeline
+            id="service-timeline"
+            onOpenIntake={onOpenIntake}
+            className="border-t-0 py-0 sm:py-0 bg-transparent"
+          />
         </div>
 
         {/* PAYMENT TERMS & SETTLEMENT RAILS */}

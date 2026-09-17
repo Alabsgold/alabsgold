@@ -71,8 +71,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenIntake }) => {
       {/* 3 Core Service Pillars (Trust Infrastructure, AI & Automation, Secure Backend) */}
       <ServicesSection onSelectServiceForIntake={(title) => onOpenIntake(title)} />
 
-      {/* Structured Delivery Process & alabsgold-core */}
-      <ProcessSection />
+      {/* Structured Delivery Process & alabsgold-core Interactive Timeline */}
+      <ProcessSection onOpenIntake={(phase) => onOpenIntake(phase)} />
 
       {/* Top 6 Featured Selected Works Grid */}
       <section className="py-24 bg-[#0c0c0e] border-t border-b border-[#27272a] relative overflow-hidden">
