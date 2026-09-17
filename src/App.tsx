@@ -6,7 +6,10 @@ import { Preloader } from './components/Preloader';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { IntakeModal } from './components/IntakeModal';
+import { QuickReachModal } from './components/QuickReachModal';
+import { GoogleSheetsHubModal } from './components/GoogleSheetsHubModal';
 import { GoldMouseSpotlight } from './components/GoldMouseSpotlight';
+import { Zap, MessageSquare } from 'lucide-react';
 
 // Dedicated Page Components
 import { HomePage } from './pages/HomePage';
@@ -29,6 +32,9 @@ function MainLayout() {
   const [showPreloader, setShowPreloader] = useState(true);
   const [isIntakeOpen, setIsIntakeOpen] = useState(false);
   const [preselectedService, setPreselectedService] = useState<string | undefined>(undefined);
+  const [isQuickReachOpen, setIsQuickReachOpen] = useState(false);
+  const [quickReachCategory, setQuickReachCategory] = useState<'Service Scoping' | 'Product Inquiry' | 'Client Review' | 'Quick Question' | 'Advisory'>('Quick Question');
+  const [isSheetsHubOpen, setIsSheetsHubOpen] = useState(false);
 
   // Framer Motion useScroll hook for the fixed gold progress indicator
   const { scrollYProgress } = useScroll();
@@ -66,6 +72,30 @@ function MainLayout() {
     }
   }, []);
 
+  // Hidden Founder Desk shortcut: Ctrl+Shift+L or Cmd+Shift+L
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'L' || e.key === 'l' || e.key === 'A' || e.key === 'a')) {
+        e.preventDefault();
+        setIsSheetsHubOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const location = useLocation();
+  useEffect(() => {
+    if (
+      location.pathname === '/admin' ||
+      location.pathname === '/founder-ledger' ||
+      location.pathname === '/studio-vault' ||
+      location.hash === '#founder-ledger'
+    ) {
+      setIsSheetsHubOpen(true);
+    }
+  }, [location.pathname, location.hash]);
+
   const handleOpenIntake = (serviceTitle?: string) => {
     setPreselectedService(serviceTitle);
     setIsIntakeOpen(true);
@@ -74,6 +104,11 @@ function MainLayout() {
   const handleCloseIntake = () => {
     setIsIntakeOpen(false);
     setPreselectedService(undefined);
+  };
+
+  const handleOpenQuickReach = (category: 'Service Scoping' | 'Product Inquiry' | 'Client Review' | 'Quick Question' | 'Advisory' = 'Quick Question') => {
+    setQuickReachCategory(category);
+    setIsQuickReachOpen(true);
   };
 
   const handleReplayIntro = () => {
@@ -119,9 +154,10 @@ function MainLayout() {
         {/* Ambient Gold Mouse Spotlight follower */}
         <GoldMouseSpotlight />
 
-        {/* Global Navigation */}
+        {/* Global Navigation - Public facing only */}
         <Navbar
           onOpenIntake={() => handleOpenIntake()}
+          onOpenQuickReach={() => handleOpenQuickReach('Quick Question')}
           onReplayPreloader={handleReplayIntro}
         />
 
@@ -134,19 +170,51 @@ function MainLayout() {
             <Route path="/founder" element={<FounderPage onOpenIntake={handleOpenIntake} />} />
             <Route path="/about" element={<AboutPage onOpenIntake={handleOpenIntake} />} />
             <Route path="/contact" element={<ContactPage />} />
+            {/* Private founder ledger routes */}
+            <Route path="/admin" element={<HomePage onOpenIntake={handleOpenIntake} />} />
+            <Route path="/founder-ledger" element={<HomePage onOpenIntake={handleOpenIntake} />} />
+            <Route path="/studio-vault" element={<HomePage onOpenIntake={handleOpenIntake} />} />
             {/* Catch-all fallback */}
             <Route path="*" element={<HomePage onOpenIntake={handleOpenIntake} />} />
           </Routes>
         </main>
 
+        {/* Floating Client Quick Reach Button - Zero public sheets buttons */}
+        <aside aria-label="Quick Reach Out" className="fixed bottom-6 right-6 z-40 flex items-center">
+          <button
+            onClick={() => handleOpenQuickReach('Quick Question')}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-black font-semibold text-xs font-mono tracking-wider transition-all shadow-xl shadow-amber-500/20 active:scale-95 cursor-pointer"
+          >
+            <Zap className="w-3.5 h-3.5 fill-black" />
+            <span>Quick Reach / Review</span>
+          </button>
+        </aside>
+
         {/* Global Footer */}
-        <Footer onOpenIntake={() => handleOpenIntake()} />
+        <Footer
+          onOpenIntake={() => handleOpenIntake()}
+          onOpenQuickReach={() => handleOpenQuickReach('Client Review')}
+          onOpenFounderConsole={() => setIsSheetsHubOpen(true)}
+        />
 
         {/* Interactive Consultation Intake Dialog */}
         <IntakeModal
           isOpen={isIntakeOpen}
           onClose={handleCloseIntake}
           preselectedService={preselectedService}
+        />
+
+        {/* Rapid Interaction & Review Modal with Auto-Mail */}
+        <QuickReachModal
+          isOpen={isQuickReachOpen}
+          onClose={() => setIsQuickReachOpen(false)}
+          defaultCategory={quickReachCategory}
+        />
+
+        {/* Google Sheets Live Ledger Hub */}
+        <GoogleSheetsHubModal
+          isOpen={isSheetsHubOpen}
+          onClose={() => setIsSheetsHubOpen(false)}
         />
       </motion.div>
     </>

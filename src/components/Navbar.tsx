@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Shield, Menu, X, ArrowUpRight, Terminal, Activity } from 'lucide-react';
+import { Shield, Menu, X, ArrowUpRight, Terminal, Activity, Zap } from 'lucide-react';
 import { AlabsgoldLogo } from './AlabsgoldLogo';
 
 interface NavbarProps {
   onOpenIntake: () => void;
+  onOpenQuickReach?: () => void;
   onReplayPreloader?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenIntake, onReplayPreloader }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenIntake,
+  onOpenQuickReach,
+  onReplayPreloader,
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -89,6 +94,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenIntake, onReplayPreloader 
               <span>SLA: 99.995%</span>
             </div>
 
+            {onOpenQuickReach && (
+              <button
+                onClick={onOpenQuickReach}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#18181b] border border-[#27272a] hover:border-amber-500/40 text-xs font-mono text-zinc-300 hover:text-amber-400 transition-colors cursor-pointer"
+                title="Quick Question or Client Review"
+              >
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span>Quick Reach</span>
+              </button>
+            )}
+
             <button
               onClick={onOpenIntake}
               className="relative inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-black bg-gradient-to-r from-amber-400 to-amber-500 rounded-lg hover:from-amber-300 hover:to-amber-400 transition-all shadow-[0_0_15px_rgba(245,158,11,0.25)] hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] active:scale-95 cursor-pointer font-semibold"
@@ -144,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenIntake, onReplayPreloader 
                 </NavLink>
               ))}
             </div>
-            <div className="pt-2 border-t border-zinc-800">
+            <div className="pt-2 border-t border-zinc-800 space-y-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
@@ -154,6 +170,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenIntake, onReplayPreloader 
               >
                 Schedule Architecture Review
               </button>
+
+              {onOpenQuickReach && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenQuickReach();
+                  }}
+                  className="w-full py-2 px-3 text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 rounded-lg flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Quick Reach & Client Review</span>
+                </button>
+              )}
             </div>
           </div>
         )}

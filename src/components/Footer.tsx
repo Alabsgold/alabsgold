@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, ArrowUp, Mail, Globe, Terminal, Activity, CheckCircle2, MessageSquare } from 'lucide-react';
+import { Shield, ArrowUp, Mail, Globe, Terminal, Activity, CheckCircle2, MessageSquare, Zap, Lock } from 'lucide-react';
 import { STUDIO_DATA, FOUNDER_DATA } from '../data/content';
 import { AlabsgoldLogo } from './AlabsgoldLogo';
 
 interface FooterProps {
   onOpenIntake: () => void;
+  onOpenQuickReach?: () => void;
+  onOpenFounderConsole?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenIntake }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenIntake, onOpenQuickReach, onOpenFounderConsole }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -135,13 +137,23 @@ export const Footer: React.FC<FooterProps> = ({ onOpenIntake }) => {
               </div>
             </div>
 
-            <div>
+            <div className="space-y-2">
               <button
                 onClick={onOpenIntake}
                 className="w-full py-2.5 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs font-mono uppercase tracking-wider transition-colors text-center cursor-pointer shadow-md"
               >
                 Start a Project
               </button>
+
+              {onOpenQuickReach && (
+                <button
+                  onClick={onOpenQuickReach}
+                  className="w-full py-2 px-3 text-[11px] font-mono text-zinc-300 bg-[#18181b] border border-[#27272a] hover:border-amber-400/40 rounded-lg flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <Zap className="w-3 h-3 text-amber-400" />
+                  <span>Quick Feedback / Review</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -149,8 +161,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenIntake }) => {
 
         {/* Bottom copyright & Scroll to Top */}
         <div className="mt-14 pt-8 border-t border-[#27272a] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 font-mono">
-          <div>
-            © {new Date().getFullYear()} ALABSGOLD Studio. Engineered by Alabi Emmanuel.
+          <div className="flex items-center gap-2">
+            <span>© {new Date().getFullYear()} ALABSGOLD Studio. Engineered by Alabi Emmanuel.</span>
+            {onOpenFounderConsole && (
+              <button
+                onClick={onOpenFounderConsole}
+                className="opacity-25 hover:opacity-100 transition-opacity p-1 text-zinc-600 hover:text-amber-400 cursor-pointer"
+                title="Founder Desk (Strictly Authorized Access)"
+                aria-label="Founder Desk"
+              >
+                <Lock className="w-3 h-3" />
+              </button>
+            )}
           </div>
 
           <div className="flex items-center gap-6">

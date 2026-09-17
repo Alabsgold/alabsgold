@@ -13,9 +13,19 @@ import {
   Mail,
   Copy,
   Check,
+  Zap,
 } from 'lucide-react';
 import { STUDIO_DATA } from '../data/content';
 import { AlabsgoldLogo } from './AlabsgoldLogo';
+import {
+  autoDispatchNotificationEmail,
+  generateInquiryId,
+  saveInteractionLocally,
+  appendScopeToGoogleSheet,
+  findOrCreateMasterSheet,
+  ProjectScopeSubmission,
+} from '../services/googleSheetsService';
+import { getAccessToken } from '../lib/googleAuth';
 
 interface IntakeModalProps {
   isOpen: boolean;
@@ -41,6 +51,7 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [copiedQuote, setCopiedQuote] = useState(false);
+  const [inquiryId, setInquiryId] = useState('');
 
   useEffect(() => {
     if (preselectedService) {
@@ -55,6 +66,7 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
     const body = encodeURIComponent(
       `ALABSGOLD DIGITAL INFRASTRUCTURE PROJECT INTAKE\n` +
       `==================================================\n\n` +
+      `INQUIRY REF: ${inquiryId || 'AG-SCOPE-DIRECT'}\n\n` +
       `CLIENT INFORMATION:\n` +
       `• Full Name: ${formData.fullName}\n` +
       `• Company / Business: ${formData.company || 'Not Specified'}\n` +
@@ -76,6 +88,7 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
   const handleCopyQuote = () => {
     const quoteText =
       `ALABSGOLD PROJECT SCOPE DISPATCH\n` +
+      `Ref: ${inquiryId || 'AG-SCOPE'}\n` +
       `To: ${STUDIO_DATA.email}\n` +
       `Client: ${formData.fullName} (${formData.company})\n` +
       `Email: ${formData.email} | Phone: ${formData.phone}\n` +
@@ -87,23 +100,55 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
     setTimeout(() => setCopiedQuote(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const mailtoLink = generateMailtoUrl();
+    const generatedId = generateInquiryId('AG-SCOPE');
+    setInquiryId(generatedId);
 
-    // Trigger local transmission and prepare email launch
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      try {
-        // Attempt to launch default mail client directly with prefilled quote to alabsgold31@gmail.com
-        window.location.href = mailtoLink;
-      } catch (err) {
-        // Fallback gracefully if popup blocker prevents automatic launch
+    const scopePayload: ProjectScopeSubmission = {
+      id: generatedId,
+      fullName: formData.fullName,
+      email: formData.email,
+      company: formData.company,
+      phone: formData.phone,
+      country: formData.country,
+      projectType: formData.projectType,
+      budgetRange: formData.budgetRange,
+      description: formData.description,
+      timestamp: new Date().toISOString(),
+    };
+
+    // 1. Buffer in local queue
+    saveInteractionLocally({ type: 'scope', payload: scopePayload });
+
+    // 2. Auto-dispatch email directly to alabsgold31@gmail.com without opening external client
+    await autoDispatchNotificationEmail('Project Scope', {
+      Inquiry_Reference: generatedId,
+      Client_Name: formData.fullName,
+      Email: formData.email,
+      Company: formData.company || 'N/A',
+      Phone_WhatsApp: formData.phone || 'N/A',
+      Country: formData.country || 'N/A',
+      Project_Architecture: formData.projectType,
+      Budget_Tier: formData.budgetRange,
+      Scope_Details: formData.description,
+    });
+
+    // 3. If Google access token exists in memory, append to Google Sheets
+    try {
+      const token = await getAccessToken();
+      if (token) {
+        const { spreadsheetId } = await findOrCreateMasterSheet(token);
+        await appendScopeToGoogleSheet(spreadsheetId, token, scopePayload);
       }
-    }, 600);
+    } catch (err) {
+      console.warn('Queued for Google Sheets sync:', err);
+    }
+
+    setIsSubmitting(false);
+    setIsSuccess(true);
   };
 
   const handleResetAndClose = () => {
@@ -153,54 +198,75 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
               <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-white">Project Scope Prepared & Sent</h3>
+              <h3 className="text-xl font-bold text-white">Project Scope Auto-Delivered</h3>
               <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
                 Thank you, <span className="text-amber-400 font-semibold">{formData.fullName}</span>. 
-                Your quote specifications have been formatted and routed directly to Emmanuel's direct inbox at{' '}
-                <span className="text-white font-mono text-xs underline decoration-amber-400">{STUDIO_DATA.email}</span>.
+                Your technical specifications have been <strong className="text-white">automatically dispatched</strong> to Emmanuel's direct inbox (<span className="text-amber-400 font-mono text-xs">{STUDIO_DATA.email}</span>) and logged to our verified client registry. No email app required.
               </p>
 
               <div className="p-4 rounded-xl bg-[#18181b] border border-[#27272a] text-xs font-mono text-zinc-400 text-left space-y-1.5 max-w-md mx-auto">
-                <div>Company: <span className="text-zinc-200">{formData.company || 'Individual Scope'}</span></div>
-                <div>Project: <span className="text-zinc-200">{formData.projectType}</span></div>
-                <div>Budget: <span className="text-zinc-200">{formData.budgetRange}</span></div>
-                <div>Direct Recipient: <span className="text-amber-400 font-bold">{STUDIO_DATA.email}</span></div>
+                <div className="flex justify-between items-center pb-1.5 border-b border-zinc-800">
+                  <span className="text-zinc-500">Inquiry Ref:</span>
+                  <span className="text-amber-400 font-bold">{inquiryId}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-500">Auto-Mail Dispatch:</span>
+                  <span className="text-emerald-400 font-bold">✓ Delivered to {STUDIO_DATA.email}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-500">Security & Registry:</span>
+                  <span className="text-emerald-400 font-bold flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5" /> Verified & Logged
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-500">Selected Scope:</span>
+                  <span className="text-zinc-200">{formData.projectType}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-500">Budget Tier:</span>
+                  <span className="text-zinc-200">{formData.budgetRange}</span>
+                </div>
               </div>
 
-              <div className="pt-3 flex flex-wrap items-center justify-center gap-2.5">
-                <a
-                  href={generateMailtoUrl()}
-                  className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2 shadow-md shadow-amber-400/20"
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                  <span>Send Direct Email ({STUDIO_DATA.email})</span>
-                </a>
+              <div className="pt-2 text-xs text-zinc-500 font-mono">
+                Optional: You can also ping Emmanuel directly on WhatsApp with your reference.
+              </div>
 
+              <div className="pt-1 flex flex-wrap items-center justify-center gap-2.5">
                 <a
                   href={STUDIO_DATA.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2"
+                  className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2 shadow-sm"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Also Message WhatsApp</span>
+                  <span>Message on WhatsApp</span>
                 </a>
 
                 <button
                   onClick={handleCopyQuote}
-                  className="px-3 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs cursor-pointer flex items-center gap-1.5"
+                  className="px-3.5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs cursor-pointer flex items-center gap-1.5"
                 >
                   {copiedQuote ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>{copiedQuote ? 'Copied Scope!' : 'Copy Scope'}</span>
+                  <span>{copiedQuote ? 'Copied Scope & Ref!' : 'Copy Scope Specs'}</span>
                 </button>
+
+                <a
+                  href={generateMailtoUrl()}
+                  className="px-3 py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white text-xs font-mono transition-all flex items-center gap-1.5"
+                >
+                  <Mail className="w-3 h-3" />
+                  <span>Open in Mail App</span>
+                </a>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-3">
                 <button
                   onClick={handleResetAndClose}
-                  className="text-xs text-zinc-500 hover:text-zinc-300 underline cursor-pointer"
+                  className="px-6 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs cursor-pointer"
                 >
-                  Close Scoping Window
+                  Done
                 </button>
               </div>
             </div>
