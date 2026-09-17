@@ -91,7 +91,8 @@ export interface FaqItem {
   id: string;
   question: string;
   answer: string;
-  category: 'Engagement' | 'Technical' | 'Security & IP' | 'Delivery';
+  category: 'Engagement Models' | 'Project Timelines' | 'Payment Structures' | 'Technical Architecture' | 'Security & Ownership' | string;
+  tag?: string;
 }
 
 export interface SimulationStep {

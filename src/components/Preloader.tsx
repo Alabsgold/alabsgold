@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { AlabsgoldLogo } from './AlabsgoldLogo';
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -85,23 +86,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           {/* Central Branded Content */}
           <div className="relative z-10 flex flex-col items-center text-center max-w-md w-full">
             
-            {/* Geometric Insignia Emblem */}
+            {/* Geometric Insignia Emblem - The Alabsgold A */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0, y: -10 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="relative mb-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#111114] border border-[#27272a] flex items-center justify-center shadow-[0_0_35px_rgba(245,158,11,0.25)] relative overflow-hidden group">
-                {/* Rotating subtle interior gradient ring */}
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-transparent to-amber-500/10" />
-                
-                {/* Center Gold Geometric Seed */}
-                <div className="relative w-4 h-4 rounded-sm bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 shadow-[0_0_16px_rgba(245,158,11,0.8)]" />
-
-                {/* Status Dot */}
-                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-[#111114]" />
-              </div>
+              <AlabsgoldLogo variant="mark" size="xl" withStatus={true} className="shadow-[0_0_40px_rgba(245,158,11,0.3)] rounded-2xl" />
             </motion.div>
 
             {/* ALABSGOLD Wordmark with Gold Shimmer */}

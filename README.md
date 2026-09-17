@@ -41,7 +41,7 @@ ALABSGOLD closes this gap with high-performance engineering: verified compliance
 | `/products` | **Products & Labs** | Categorized portfolio featuring live production platforms, brand identity systems, and R&D lab experiments (*PrepAI*, *PrepCBT*, *EX-DIGITAL*, *Project Aegis*). |
 | `/founder` | **Founder Profile** | Profile of Founder & Lead Systems Engineer **Alabi Emmanuel**, 1st place NiRA-XT Hackathon award, Alluvium enterprise SIWES experience, and verified certifications. |
 | `/about` | **About Studio** | Mission statement, the structural credibility gap analysis, 4 studio quality pillars, global operating corridors, and regulatory compliance standards. |
-| `/contact` | **Contact & Intake** | Authentic project intake scoping form, guaranteed 24-hour response SLA (Mon–Sat), direct WhatsApp link (`+234 810 034 5062`), and categorized FAQs. |
+| `/contact` | **Contact & Intake** | Authentic project intake scoping form, guaranteed 24-hour response SLA (Mon–Sat), direct WhatsApp link (`+234 703 996 0964`), and Radix UI Accordion FAQs. |
 
 ---
 
@@ -117,6 +117,7 @@ Generates optimized, treeshaken static assets in the `dist/` directory.
 │   ├── index.css               # Global Tailwind CSS import
 │   ├── types.ts                # Centralized TypeScript models and domain interfaces
 │   ├── components/             # Reusable UI modules
+│   │   ├── AlabsgoldLogo.tsx          # Custom architectural 'A' monogram & studio wordmark
 │   │   ├── ArchitectureSimulator.tsx  # Interactive visual dataflow simulator
 │   │   ├── CaseStudiesSection.tsx     # Deep-dive engineering breakdowns
 │   │   ├── FaqSection.tsx             # Collapsible FAQ accordion with category filter

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, ArrowUp, Mail, Globe, Terminal, Activity, CheckCircle2, MessageSquare } from 'lucide-react';
 import { STUDIO_DATA, FOUNDER_DATA } from '../data/content';
+import { AlabsgoldLogo } from './AlabsgoldLogo';
 
 interface FooterProps {
   onOpenIntake: () => void;
@@ -49,14 +50,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenIntake }) => {
           
           {/* Studio Brand Bio */}
           <div className="lg:col-span-5 space-y-4">
-            <Link to="/" className="flex items-center gap-2 w-fit">
-              <div className="w-8 h-8 rounded-lg bg-[#18181b] border border-[#27272a] flex items-center justify-center">
-                <div className="w-2 h-2 rounded-sm bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
-              </div>
-              <span className="font-bold tracking-wider text-lg text-white">ALABSGOLD</span>
-              <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
-                STUDIO
-              </span>
+            <Link to="/" className="group w-fit block">
+              <AlabsgoldLogo variant="full" size="md" withStatus={true} />
             </Link>
 
             <p className="text-xs sm:text-sm text-zinc-400 max-w-sm leading-relaxed font-normal">

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import * as Dialog from '@radix-ui/react-dialog';
 import { X, CheckCircle2, ArrowRight, ShieldCheck, Clock, Terminal, Send, MessageSquare } from 'lucide-react';
 import { STUDIO_DATA } from '../data/content';
+import { AlabsgoldLogo } from './AlabsgoldLogo';
 
 interface IntakeModalProps {
   isOpen: boolean;
@@ -59,17 +60,20 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
           
           {/* Header */}
           <div className="flex items-start justify-between pb-4 border-b border-[#27272a]">
-            <div>
-              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20 text-xs font-mono mb-1">
-                <Terminal className="w-3.5 h-3.5" />
-                <span>START A PROJECT · ALABSGOLD</span>
+            <div className="flex items-center gap-3">
+              <AlabsgoldLogo variant="mark" size="md" withStatus={true} />
+              <div>
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20 text-xs font-mono mb-1">
+                  <Terminal className="w-3.5 h-3.5" />
+                  <span>START A PROJECT · ALABSGOLD</span>
+                </div>
+                <Dialog.Title className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Project Intake & Scoping
+                </Dialog.Title>
+                <Dialog.Description className="text-xs text-zinc-400 mt-0.5">
+                  Direct submission to Founder & Lead Engineer Alabi Emmanuel.
+                </Dialog.Description>
               </div>
-              <Dialog.Title className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                Project Intake & Scoping
-              </Dialog.Title>
-              <Dialog.Description className="text-xs text-zinc-400 mt-0.5">
-                Direct submission to Founder & Lead Engineer Alabi Emmanuel.
-              </Dialog.Description>
             </div>
 
             <Dialog.Close asChild>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Shield, Menu, X, ArrowUpRight, Terminal, Activity } from 'lucide-react';
+import { AlabsgoldLogo } from './AlabsgoldLogo';
 
 interface NavbarProps {
   onOpenIntake: () => void;
@@ -47,26 +48,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenIntake, onReplayPreloader 
           {/* Brand Logo */}
           <Link
             to="/"
-            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg p-1"
+            className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg p-1"
           >
-            <div className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-[#18181b] border border-[#27272a] group-hover:border-amber-500/50 transition-colors">
-              <div className="w-2.5 h-2.5 rounded-sm bg-gradient-to-br from-amber-400 to-amber-600 shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
-              <div className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold tracking-wider text-base text-zinc-100 group-hover:text-amber-400 transition-colors">
-                  ALABSGOLD
-                </span>
-                <span className="text-[10px] uppercase font-mono tracking-widest px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">
-                  STUDIO
-                </span>
-              </div>
-              <span className="text-[11px] text-zinc-400 font-mono tracking-tight flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                International Digital Infrastructure
-              </span>
-            </div>
+            <AlabsgoldLogo variant="full" size="md" withStatus={true} />
           </Link>
 
           {/* Desktop Navigation */}

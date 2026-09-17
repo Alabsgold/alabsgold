@@ -724,47 +724,108 @@ export const ABOUT_DATA = {
 };
 
 export const FAQS: FaqItem[] = [
+  // --- ENGAGEMENT MODELS ---
   {
-    id: 'faq-1',
-    category: 'Engagement',
-    question: 'How do you price your projects, and what are the payment terms?',
+    id: 'faq-engagement-models',
+    category: 'Engagement Models',
+    tag: 'Core Delivery',
+    question: 'What engagement models does ALABSGOLD offer for client partnerships?',
     answer:
-      'We offer transparent milestone-based pricing with dual currency options: Starter Platforms (₦350,000 – ₦650,000 / $500 – $800), Professional Infrastructure (₦650,000 – ₦1,300,000 / £800 – £1,200), and Premium Enterprise Builds (₦900,000 – ₦2,200,000+ / £1,200 – £1,800+). Terms are straightforward: a 50% upfront commitment deposit to secure scheduling and commence architecture, and 50% upon QA approval prior to DNS handover. Nigerian clients settle via direct bank transfer; international clients pay via Geegpay, Grey, Wise, or Payoneer.',
+      'We work with clients across three primary models: (1) Fixed-Scope Milestone Engagements — our flagship model for new platform builds, redesigns, and export quotation systems with a firmly defined scope, timeline, and deliverables; (2) Monthly Technical Retainers (SLA) — for established operations requiring ongoing feature development, cloud infrastructure monitoring, database tuning, and emergency incident response; and (3) Dedicated Architecture Sprints — 1 to 2-week technical audits and system feasibility studies for clients evaluating high-risk software decisions or pre-investment due diligence.',
   },
   {
-    id: 'faq-2',
-    category: 'Technical',
-    question: 'Why do you avoid WordPress, Elementor, and page-builder platforms?',
+    id: 'faq-discovery-scope-lock',
+    category: 'Engagement Models',
+    tag: 'Process Invariant',
+    question: 'Why is the Discovery Phase mandatory before writing production code?',
     answer:
-      'Page builders introduce heavy runtime overhead, plugin security vulnerabilities, and vendor lock-in. International buyers vetting an exporter or real estate portal immediately notice sluggish load times. We hand-code every platform in Next.js, React, TypeScript, and Python/Django with custom-built Studio admin panels. This guarantees sub-second speeds, flawless security, and zero recurring CMS plugin fees.',
+      'We do not guess requirements or bill by the vague hour. Every build begins with Phase 1: Discovery & Scope Definition, where we map user conversion funnels, data schemas, API contracts, third-party webhook integrations, and non-functional requirements. Once the Architecture Decision Record (ADR) and functional specification are signed off, scope is firmly locked. This protects you from mid-sprint budget inflation and guarantees that we deliver the exact system you commissioned on time.',
   },
   {
-    id: 'faq-3',
-    category: 'Security & IP',
-    question: 'Who owns the code and intellectual property after launch?',
+    id: 'faq-what-we-dont-do',
+    category: 'Engagement Models',
+    tag: 'Studio Boundaries',
+    question: 'What types of projects or technical requests does ALABSGOLD decline?',
     answer:
-      'You own 100% of all intellectual property, source code, design assets, and deployment configurations from the moment final payment is completed. Everything is delivered cleanly in your private GitHub or GitLab repository with complete documentation. There are zero licensing lock-ins or proprietary vendor traps.',
+      'To maintain engineering integrity, we enforce four strict boundaries: We do not build on WordPress, Elementor, Wix, or page-builder platforms; we do not accept projects without a Discovery phase; we do not work on hourly, undefined retainers without clear deliverables; and we do not patch undocumented legacy spaghetti code without a formal architectural replatforming plan. Every platform we release must hold up under international buyer scrutiny.',
+  },
+
+  // --- PROJECT TIMELINES ---
+  {
+    id: 'faq-typical-timelines',
+    category: 'Project Timelines',
+    tag: 'Turnaround SLAs',
+    question: 'What are the typical project turnaround timelines across different tiers?',
+    answer:
+      'Our turnaround is tied directly to architectural complexity: Starter Corporate Platforms deliver in 7 to 10 working days; Professional Infrastructure builds (including bespoke Studio Admin CMS, multi-step lead funnels, and automated WhatsApp sales desk routing) complete in 2 to 3 weeks; and Flagship Enterprise Platforms (custom volume quotation engines, international compliance showcases, and multi-currency payment integrations) complete in 3 to 5 weeks. Retainers operate on continuous monthly sprint cycles.',
   },
   {
-    id: 'faq-4',
-    category: 'Delivery',
-    question: 'What is the typical turnaround timeline for a complete build?',
+    id: 'faq-speed-and-velocity',
+    category: 'Project Timelines',
+    tag: 'Engineering Velocity',
+    question: 'How does ALABSGOLD deliver custom software in weeks rather than months?',
     answer:
-      'Our engagements run through a structured 5-phase delivery model (Discovery, Architecture, Build, Launch, and Support). Leveraging our proprietary alabsgold-core base framework, typical builds complete in 10 to 20 working days depending on scope complexity. We lock scope firmly during Discovery so projects finish on time without surprise delays.',
+      'We achieve rapid velocity without sacrificing quality by leveraging our proprietary alabsgold-core internal base framework. We have battle-tested, pre-hardened libraries for RBAC authentication, HMAC webhook validation, SQLite/PostgreSQL schema scaffolding, and Nginx reverse proxy configs. We never start from an empty text editor for standard plumbing, which allows 100% of sprint time to focus on your unique business logic, quotation math, and brand credibility.',
   },
   {
-    id: 'faq-5',
-    category: 'Technical',
-    question: 'How does the custom Studio Admin Panel work for non-technical teams?',
+    id: 'faq-change-requests-timelines',
+    category: 'Project Timelines',
+    tag: 'Scope Governance',
+    question: 'How are client feedback loops and mid-project revision requests managed?',
     answer:
-      'Instead of forcing your team to navigate complex WordPress dashboards or paying for third-party CMS subscriptions like Sanity or Contentful, we build a lightweight, bespoke Studio backoffice (/studio) tailored specifically to your data models. Your non-technical team can add products, update certifications, edit blog posts, and review customer quotations without touching code.',
+      'Transparency is continuous. You receive private staging environment deployments with every sprint milestone, accompanied by loom video walk-throughs. Revisions directly related to the agreed architectural specification are resolved during our dedicated QA and validation window. If your team requests net-new features mid-sprint, we isolate them into a structured Phase 2 sprint backlog so that your core platform launch date is never compromised.',
+  },
+
+  // --- PAYMENT STRUCTURES ---
+  {
+    id: 'faq-payment-structure-milestones',
+    category: 'Payment Structures',
+    tag: 'Commercial Terms',
+    question: 'What is your payment structure, deposit requirement, and milestone schedule?',
+    answer:
+      'We operate on a transparent 50/50 milestone payment structure. A 50% commitment deposit is paid upon proposal sign-off to reserve your dedicated engineering sprint calendar and initiate the Discovery phase. The remaining 50% balance is invoiced only after you review and approve the fully functioning system on our private staging server during QA, prior to production DNS propagation and source code repository transfer.',
   },
   {
-    id: 'faq-6',
-    category: 'Engagement',
-    question: 'How do we get started with ALABSGOLD?',
+    id: 'faq-accepted-currencies-methods',
+    category: 'Payment Structures',
+    tag: 'Dual Currency Settlement',
+    question: 'What payment currencies and international settlement rails do you accept?',
     answer:
-      'Fill out the project inquiry form on our Contact page or send a message via WhatsApp. We review every submission within 24 hours (Monday through Saturday) to confirm technical feasibility, schedule a 20-minute discovery call, and provide an itemized scoping proposal.',
+      'We offer dual-currency pricing to accommodate both domestic and international enterprises. Nigerian corporate entities settle in Nigerian Naira (NGN) via direct commercial bank transfer with full VAT/invoicing documentation. International clients across the UK, North America, Europe, and the African diaspora settle in British Pounds (GBP), US Dollars (USD), or Euros (EUR) through Geegpay, Grey, Wise, or Payoneer with zero cross-border friction.',
+  },
+  {
+    id: 'faq-hidden-fees-and-licensing',
+    category: 'Payment Structures',
+    tag: 'Total Cost of Ownership',
+    question: 'Are there hidden costs, recurring CMS plugin subscriptions, or software licenses?',
+    answer:
+      'None. Unlike agency setups that quietly require hundreds of dollars in monthly subscriptions for CMS add-ons, Elementor licenses, or cloud vendor locks, ALABSGOLD builds self-contained, high-performance software. Our production builds deploy on lean, self-managed Ubuntu VPS instances (typically $6 to $12/month paid directly to DigitalOcean, Linode, or Hetzner). You pay only for raw server compute and domain registration.',
+  },
+  {
+    id: 'faq-warranty-and-guarantees',
+    category: 'Payment Structures',
+    tag: 'Post-Launch Warranty',
+    question: 'What post-launch technical warranty and guarantees are included with each build?',
+    answer:
+      'Every project includes a comprehensive 30-day (Starter & Professional) or 45-day (Enterprise) post-launch warranty at zero extra charge. This covers bug remediation, server telemetry checks, SSL certificate validation, and configuration tuning. In addition, you receive complete Architecture Decision Records (ADRs), environment configuration runbooks, and a recorded video training session for your staff.',
+  },
+
+  // --- TECHNICAL ARCHITECTURE & IP ---
+  {
+    id: 'faq-code-ip-ownership',
+    category: 'Security & Ownership',
+    tag: 'Full Intellectual Property',
+    question: 'Who owns the intellectual property and source code once the project is finished?',
+    answer:
+      'You own 100% of all intellectual property, source code, database schemas, design assets, and server configurations the moment final milestone settlement is complete. We transfer repository ownership directly to your organization’s private GitHub or GitLab account. We never hold code hostage, and there are zero licensing royalties or vendor traps.',
+  },
+  {
+    id: 'faq-studio-admin-cms',
+    category: 'Technical Architecture',
+    tag: 'Custom Studio Backoffice',
+    question: 'How does your custom Studio Admin CMS work for non-technical team members?',
+    answer:
+      'Instead of subjecting your staff to the bloat and security hazards of WordPress wp-admin, we engineer a bespoke, lightweight Studio backoffice (/studio) tailored specifically to your data models. Your operations team can easily publish commodity updates, adjust export volume pricing, post laboratory certifications, and manage inbound quotation requests with zero technical knowledge required.',
   },
 ];
 

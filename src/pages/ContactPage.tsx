@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useSEO } from '../hooks/useSEO';
-import { FOUNDER_DATA, FAQS, STUDIO_DATA, AUTHENTIC_PRICING_TIERS } from '../data/content';
+import { FOUNDER_DATA, STUDIO_DATA, AUTHENTIC_PRICING_TIERS } from '../data/content';
+import { FaqSection } from '../components/FaqSection';
 import {
   Mail,
   Clock,
@@ -41,8 +42,6 @@ export const ContactPage: React.FC = () => {
   });
 
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [faqCategory, setFaqCategory] = useState<string>('All');
-  const [openFaqId, setOpenFaqId] = useState<string | null>(null);
 
   // Intake Form State based on Section 7
   const [formData, setFormData] = useState({
@@ -73,10 +72,6 @@ export const ContactPage: React.FC = () => {
       setIsSuccess(true);
     }, 1200);
   };
-
-  const categories = ['All', 'General', 'Technical', 'Pricing & Process', 'Services'];
-  const filteredFaqs =
-    faqCategory === 'All' ? FAQS : FAQS.filter((f) => f.category === faqCategory);
 
   return (
     <div className="pt-28 pb-24 bg-[#09090b] text-[#f4f4f5] min-h-screen">
@@ -403,61 +398,14 @@ export const ContactPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Integrated FAQ Section */}
-        <div className="mt-28">
-          <div className="max-w-2xl mb-10">
-            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold">
-              ANSWERS TO COMMON QUESTIONS
-            </span>
-            <h2 className="text-3xl font-extrabold text-white mt-2">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-8">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFaqCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors cursor-pointer ${
-                  faqCategory === cat
-                    ? 'bg-amber-400 text-black font-semibold'
-                    : 'bg-[#111114] text-zinc-400 hover:text-white border border-[#27272a]'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="space-y-4 max-w-4xl">
-            {filteredFaqs.map((faq) => {
-              const isOpen = openFaqId === faq.id;
-              return (
-                <div
-                  key={faq.id}
-                  className="rounded-2xl bg-[#111114] border border-[#27272a] overflow-hidden transition-colors"
-                >
-                  <button
-                    onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
-                    className="w-full p-6 text-left flex items-center justify-between gap-4 cursor-pointer"
-                  >
-                    <span className="text-base font-semibold text-white">{faq.question}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 text-zinc-400 transition-transform ${
-                        isOpen ? 'rotate-180 text-amber-400' : ''
-                      }`}
-                    />
-                  </button>
-                  {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-sm text-zinc-400 leading-relaxed border-t border-zinc-800/60 font-normal">
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+        {/* Integrated FAQ Component using Radix UI Accordion */}
+        <div className="mt-28 border-t border-[#27272a] pt-16">
+          <FaqSection
+            showHeader={true}
+            title="Common Client Questions Before Inquiring"
+            subtitle="Authoritative answers regarding our engagement models, timeline SLAs, and 50/50 milestone payment schedules."
+            className="border-t-0 py-0 sm:py-0 bg-transparent"
+          />
         </div>
 
       </div>
