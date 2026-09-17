@@ -68,7 +68,7 @@ export const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({
   return (
     <aside
       aria-label="Cookie & Privacy Consent"
-      className="fixed bottom-3 sm:bottom-5 inset-x-0 mx-auto z-50 w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] max-w-5xl animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto"
+      className="fixed bottom-3 sm:bottom-5 inset-x-0 mx-auto z-[9990] w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)] max-w-5xl animate-in fade-in slide-in-from-bottom-4 duration-300 pointer-events-auto"
     >
       {/* Liquid Glass Extended Curved Rectangle */}
       <div className="relative overflow-hidden rounded-2xl md:rounded-full bg-[#0d0e12]/80 backdrop-blur-2xl border border-white/15 hover:border-amber-500/30 px-4 py-3 sm:px-6 sm:py-3 shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.18)] transition-all duration-300">

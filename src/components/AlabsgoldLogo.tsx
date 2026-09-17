@@ -9,7 +9,7 @@ export interface AlabsgoldLogoProps {
 
 /**
  * AlabsgoldLogo: The signature architectural "A" monogram emblem & full studio wordmark for ALABSGOLD.
- * Features faceted gold struts, inner apex geometry, and signature crossbar chevron.
+ * Features the authentic futuristic sliced "A" geometry and iconic ALABS [G] OLD typography.
  */
 export const AlabsgoldLogo: React.FC<AlabsgoldLogoProps> = ({
   variant = 'full',
@@ -19,11 +19,11 @@ export const AlabsgoldLogo: React.FC<AlabsgoldLogoProps> = ({
 }) => {
   // Dimensions mapping for the emblem container
   const sizeMap = {
-    xs: { box: 'w-6 h-6 rounded-md', svg: 'w-4 h-4', text: 'text-sm', badge: 'text-[9px]' },
-    sm: { box: 'w-8 h-8 rounded-lg', svg: 'w-5 h-5', text: 'text-base', badge: 'text-[10px]' },
-    md: { box: 'w-9 h-9 rounded-lg', svg: 'w-6 h-6', text: 'text-base', badge: 'text-[10px]' },
-    lg: { box: 'w-12 h-12 rounded-xl', svg: 'w-7 h-7', text: 'text-xl', badge: 'text-xs' },
-    xl: { box: 'w-16 h-16 rounded-2xl', svg: 'w-10 h-10', text: 'text-3xl', badge: 'text-sm' },
+    xs: { box: 'w-6 h-6 rounded-md', svg: 'w-4 h-4', text: 'text-xs', gBox: 'w-4 h-4 text-[10px] rounded-md', badge: 'text-[9px]' },
+    sm: { box: 'w-8 h-8 rounded-lg', svg: 'w-5 h-5', text: 'text-sm', gBox: 'w-5 h-5 text-xs rounded-md', badge: 'text-[10px]' },
+    md: { box: 'w-9 h-9 rounded-lg', svg: 'w-6 h-6', text: 'text-base', gBox: 'w-6 h-6 text-sm rounded-lg', badge: 'text-[10px]' },
+    lg: { box: 'w-12 h-12 rounded-xl', svg: 'w-8 h-8', text: 'text-xl', gBox: 'w-8 h-8 text-base rounded-lg', badge: 'text-xs' },
+    xl: { box: 'w-16 h-16 rounded-2xl', svg: 'w-11 h-11', text: 'text-3xl', gBox: 'w-10 h-10 text-xl rounded-xl', badge: 'text-sm' },
   };
 
   const currentSize = sizeMap[size];
@@ -32,47 +32,39 @@ export const AlabsgoldLogo: React.FC<AlabsgoldLogoProps> = ({
     <div
       className={`relative flex items-center justify-center ${currentSize.box} bg-[#18181b] border border-[#27272a] transition-all duration-300 group-hover:border-amber-500/60 shadow-[0_0_15px_rgba(0,0,0,0.5)] flex-shrink-0`}
     >
-      {/* Precision Vector "A" Monogram */}
+      {/* Precision Vector "A" Monogram matching the brand showcase video */}
       <svg
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${currentSize.svg} drop-shadow-[0_0_8px_rgba(245,158,11,0.45)]`}
+        className={`${currentSize.svg} drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]`}
       >
         <defs>
-          <linearGradient id="logo-gold-left" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="logo-gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#fef08a" />
-            <stop offset="35%" stopColor="#f59e0b" />
+            <stop offset="50%" stopColor="#f59e0b" />
             <stop offset="100%" stopColor="#b45309" />
           </linearGradient>
-
-          <linearGradient id="logo-gold-right" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fde047" />
-            <stop offset="40%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#78350f" />
-          </linearGradient>
-
-          <linearGradient id="logo-gold-cross" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="50%" stopColor="#fef3c7" />
-            <stop offset="100%" stopColor="#d97706" />
+          <linearGradient id="logo-white-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="100%" stopColor="#d4d4d8" />
           </linearGradient>
         </defs>
 
         {/* Ambient subtle warm gold backlight */}
-        <circle cx="50" cy="50" r="32" fill="#f59e0b" fillOpacity="0.12" />
+        <circle cx="50" cy="50" r="32" fill="#f59e0b" fillOpacity="0.15" />
 
-        {/* Left Architectural Strut */}
-        <path d="M 50 16 L 22 84 L 36 84 L 46 58 L 50 58 Z" fill="url(#logo-gold-left)" />
+        {/* Left Angular Architectural Strut */}
+        <path d="M 50 14 L 18 86 L 31 86 L 43 56 L 50 42 Z" fill="url(#logo-white-grad)" />
 
-        {/* Right Architectural Strut */}
-        <path d="M 50 16 L 78 84 L 64 84 L 54 58 L 50 58 Z" fill="url(#logo-gold-right)" />
+        {/* Right Architectural Strut with Gold Relief */}
+        <path d="M 50 14 L 82 86 L 69 86 L 57 56 L 50 42 Z" fill="url(#logo-gold-grad)" />
 
-        {/* Inner Apex Geometry */}
-        <polygon points="50,26 44,48 56,48" fill="#fef08a" fillOpacity="0.95" />
+        {/* Signature Sharp Chevron Slash extending past apex */}
+        <path d="M 30 65 L 90 44 L 87 38 L 35 56 Z" fill="url(#logo-gold-grad)" />
 
-        {/* Signature Architectural Crossbar Chevron */}
-        <path d="M 33 66 L 50 56 L 67 66 L 50 73 Z" fill="url(#logo-gold-cross)" />
+        {/* Inner Apex Triangular Geometry */}
+        <polygon points="50,26 43,48 57,48" fill="#ffffff" fillOpacity="0.95" />
       </svg>
 
       {/* Real-time studio operational status dot */}
@@ -94,13 +86,19 @@ export const AlabsgoldLogo: React.FC<AlabsgoldLogoProps> = ({
       {MarkElement}
       <div className="flex flex-col">
         <div className="flex items-center gap-1.5">
+          {/* Authentic ALABS [G] OLD Typography */}
+          <div className="flex items-center font-bold tracking-wider font-sans text-zinc-100 group-hover:text-amber-400 transition-colors">
+            <span className={currentSize.text}>ALABS</span>
+            <span
+              className={`inline-flex items-center justify-center font-extrabold ${currentSize.gBox} bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 text-black mx-1 shadow-[0_0_10px_rgba(245,158,11,0.5)]`}
+            >
+              G
+            </span>
+            <span className={currentSize.text}>OLD</span>
+          </div>
+
           <span
-            className={`font-bold tracking-wider ${currentSize.text} text-zinc-100 group-hover:text-amber-400 transition-colors font-sans`}
-          >
-            ALABSGOLD
-          </span>
-          <span
-            className={`${currentSize.badge} uppercase font-mono tracking-widest px-1.5 py-0.5 rounded bg-zinc-800/80 text-zinc-300 border border-zinc-700/70`}
+            className={`${currentSize.badge} uppercase font-mono tracking-widest px-1.5 py-0.5 rounded bg-zinc-800/80 text-zinc-300 border border-zinc-700/70 ml-1`}
           >
             STUDIO
           </span>

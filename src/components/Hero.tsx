@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, CheckCircle2, ChevronRight, Terminal, Award, ExternalLink } from 'lucide-react';
 import { STUDIO_DATA } from '../data/content';
+import { HeroBrandVideoShowcase } from './HeroBrandVideoShowcase';
 
 interface HeroProps {
   onOpenIntake: () => void;
@@ -30,6 +31,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenIntake }) => {
 
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-grid-pattern">
+      {/* Brand Video Loop & 3D Glass Shards Background Showcase */}
+      <HeroBrandVideoShowcase />
+
       {/* Ambient animated background glow */}
       <motion.div
         animate={{

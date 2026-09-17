@@ -11,6 +11,7 @@ import { GoogleSheetsHubModal } from './components/GoogleSheetsHubModal';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { CookiePreferencesModal } from './components/CookiePreferencesModal';
 import { PrivacyRightsModal } from './components/PrivacyRightsModal';
+import { GlobalLogoWallpaper } from './components/GlobalLogoWallpaper';
 import { GoldMouseSpotlight } from './components/GoldMouseSpotlight';
 import { Zap, MessageSquare } from 'lucide-react';
 
@@ -154,19 +155,21 @@ function MainLayout() {
         )}
       </AnimatePresence>
 
+      {/* Subtle "almost invisible" brand logo wallpaper across every page */}
+      <GlobalLogoWallpaper />
+
       {/* Main Website Application Container */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.985 }}
+        initial={{ opacity: 0 }}
         animate={{
           opacity: showPreloader ? 0 : 1,
-          scale: showPreloader ? 0.985 : 1,
         }}
         transition={{
           duration: 0.8,
           delay: 0.1,
           ease: [0.16, 1, 0.3, 1],
         }}
-        className="min-h-screen bg-[#09090b] text-[#f4f4f5] flex flex-col selection:bg-amber-500/25 selection:text-amber-300 relative"
+        className="min-h-screen bg-[#09090b] text-[#f4f4f5] flex flex-col selection:bg-amber-500/25 selection:text-amber-300 relative z-10"
       >
         {/* Ambient Gold Mouse Spotlight follower */}
         <GoldMouseSpotlight />
@@ -196,17 +199,6 @@ function MainLayout() {
           </Routes>
         </main>
 
-        {/* Floating Client Quick Reach Button - Zero public sheets buttons */}
-        <aside aria-label="Quick Reach Out" className="fixed bottom-6 right-6 z-40 flex items-center">
-          <button
-            onClick={() => handleOpenQuickReach('Quick Question')}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-black font-semibold text-xs font-mono tracking-wider transition-all shadow-xl shadow-amber-500/20 active:scale-95 cursor-pointer"
-          >
-            <Zap className="w-3.5 h-3.5 fill-black" />
-            <span>Quick Reach / Review</span>
-          </button>
-        </aside>
-
         {/* Global Footer */}
         <Footer
           onOpenIntake={() => handleOpenIntake()}
@@ -215,53 +207,64 @@ function MainLayout() {
           onOpenCookiePreferences={() => setIsCookiePreferencesOpen(true)}
           onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
         />
-
-        {/* Interactive Consultation Intake Dialog */}
-        <IntakeModal
-          isOpen={isIntakeOpen}
-          onClose={handleCloseIntake}
-          preselectedService={preselectedService}
-        />
-
-        {/* Rapid Interaction & Review Modal with Auto-Mail */}
-        <QuickReachModal
-          isOpen={isQuickReachOpen}
-          onClose={() => setIsQuickReachOpen(false)}
-          defaultCategory={quickReachCategory}
-        />
-
-        {/* Google Sheets Live Ledger Hub (Founder Desk) */}
-        <GoogleSheetsHubModal
-          isOpen={isSheetsHubOpen}
-          onClose={() => setIsSheetsHubOpen(false)}
-        />
-
-        {/* NDPR & GDPR Cookie & Permission Consent Banner */}
-        <CookieConsentBanner
-          onOpenPreferences={() => setIsCookiePreferencesOpen(true)}
-          onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
-        />
-
-        {/* Granular Cookie Preferences & Permission Center Modal */}
-        <CookiePreferencesModal
-          isOpen={isCookiePreferencesOpen}
-          onClose={() => setIsCookiePreferencesOpen(false)}
-          onOpenPrivacyNotice={() => {
-            setIsCookiePreferencesOpen(false);
-            setIsPrivacyNoticeOpen(true);
-          }}
-        />
-
-        {/* Statutory NDPR & GDPR Data Subject Rights Modal */}
-        <PrivacyRightsModal
-          isOpen={isPrivacyNoticeOpen}
-          onClose={() => setIsPrivacyNoticeOpen(false)}
-          onOpenCookiePreferences={() => {
-            setIsPrivacyNoticeOpen(false);
-            setIsCookiePreferencesOpen(true);
-          }}
-        />
       </motion.div>
+
+      {/* Floating Client Quick Reach Button - Anchored to Browser Viewport */}
+      <aside aria-label="Quick Reach Out" className="fixed bottom-6 right-6 z-40 flex items-center">
+        <button
+          onClick={() => handleOpenQuickReach('Quick Question')}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-black font-semibold text-xs font-mono tracking-wider transition-all shadow-xl shadow-amber-500/20 active:scale-95 cursor-pointer"
+        >
+          <Zap className="w-3.5 h-3.5 fill-black" />
+          <span>Quick Reach / Review</span>
+        </button>
+      </aside>
+
+      {/* Interactive Consultation Intake Dialog */}
+      <IntakeModal
+        isOpen={isIntakeOpen}
+        onClose={handleCloseIntake}
+        preselectedService={preselectedService}
+      />
+
+      {/* Rapid Interaction & Review Modal with Auto-Mail */}
+      <QuickReachModal
+        isOpen={isQuickReachOpen}
+        onClose={() => setIsQuickReachOpen(false)}
+        defaultCategory={quickReachCategory}
+      />
+
+      {/* Google Sheets Live Ledger Hub (Founder Desk) */}
+      <GoogleSheetsHubModal
+        isOpen={isSheetsHubOpen}
+        onClose={() => setIsSheetsHubOpen(false)}
+      />
+
+      {/* NDPR & GDPR Cookie & Permission Consent Banner - Anchored to Viewport Bottom */}
+      <CookieConsentBanner
+        onOpenPreferences={() => setIsCookiePreferencesOpen(true)}
+        onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
+      />
+
+      {/* Granular Cookie Preferences & Permission Center Modal */}
+      <CookiePreferencesModal
+        isOpen={isCookiePreferencesOpen}
+        onClose={() => setIsCookiePreferencesOpen(false)}
+        onOpenPrivacyNotice={() => {
+          setIsCookiePreferencesOpen(false);
+          setIsPrivacyNoticeOpen(true);
+        }}
+      />
+
+      {/* Statutory NDPR & GDPR Data Subject Rights Modal */}
+      <PrivacyRightsModal
+        isOpen={isPrivacyNoticeOpen}
+        onClose={() => setIsPrivacyNoticeOpen(false)}
+        onOpenCookiePreferences={() => {
+          setIsPrivacyNoticeOpen(false);
+          setIsCookiePreferencesOpen(true);
+        }}
+      />
     </>
   );
 }
