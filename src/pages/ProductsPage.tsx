@@ -7,6 +7,7 @@ import {
   EXPERIMENTS_RESEARCH,
   STUDIO_DATA,
 } from '../data/content';
+import { CaseStudyResults } from '../components/CaseStudyResults';
 import {
   Package,
   Cpu,
@@ -311,6 +312,9 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({ onOpenIntake }) => {
             </div>
           </motion.div>
         )}
+
+        {/* Case Study Results & Performance Benchmarks */}
+        <CaseStudyResults onOpenIntake={onOpenIntake} className="mt-16 -mx-4 sm:-mx-6 lg:-mx-8 rounded-3xl" />
 
         {/* Bottom Contact Callout */}
         <div className="mt-20 p-8 sm:p-10 rounded-3xl bg-[#111114] border border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-6">

@@ -8,6 +8,7 @@ import { ServicesSection } from '../components/ServicesSection';
 import { CaseStudiesSection } from '../components/CaseStudiesSection';
 import { ProcessSection } from '../components/ProcessSection';
 import { TechStackSection } from '../components/TechStackSection';
+import { CaseStudyResults } from '../components/CaseStudyResults';
 import { FaqSection } from '../components/FaqSection';
 import { SELECTED_WORKS, FOUNDER_DATA, AUTHENTIC_PRICING_TIERS, STUDIO_DATA } from '../data/content';
 import { ArrowRight, Sparkles, Shield, Cpu, Package, Check, User, Terminal, ExternalLink, Quote, Award } from 'lucide-react';
@@ -37,7 +38,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenIntake }) => {
       '@type': 'ProfessionalService',
       name: 'ALABSGOLD Studio',
       url: 'https://alabsgold.com.ng',
-      email: 'hello@alabsgold.com.ng',
+      email: 'alabsgold31@gmail.com',
       telephone: '+2347039960964',
       address: {
         '@type': 'PostalAddress',
@@ -170,6 +171,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenIntake }) => {
           </div>
         </div>
       </section>
+
+      {/* Case Study Results & Performance Benchmarks */}
+      <CaseStudyResults onOpenIntake={onOpenIntake} />
 
       {/* Authentic Budget Pricing Preview */}
       <section className="py-20 bg-[#09090b] relative">

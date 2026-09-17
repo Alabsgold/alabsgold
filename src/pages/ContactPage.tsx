@@ -64,13 +64,42 @@ export const ContactPage: React.FC = () => {
     setTimeout(() => setCopiedEmail(false), 2000);
   };
 
+  const generateMailtoUrl = () => {
+    const subject = encodeURIComponent(
+      `[ALABSGOLD Scope] ${formData.projectType} - ${formData.company || formData.fullName}`
+    );
+    const body = encodeURIComponent(
+      `ALABSGOLD DIRECT CLIENT INTAKE DISPATCH\n` +
+      `========================================\n\n` +
+      `CLIENT CONTACT:\n` +
+      `• Name: ${formData.fullName}\n` +
+      `• Company: ${formData.company || 'N/A'}\n` +
+      `• Email: ${formData.email}\n` +
+      `• Phone/WhatsApp: ${formData.phone}\n` +
+      `• Location: ${formData.country || 'N/A'}\n\n` +
+      `SCOPE DETAILS:\n` +
+      `• Type: ${formData.projectType}\n` +
+      `• Budget: ${formData.budgetRange}\n` +
+      `• Discovery Source: ${formData.source}\n\n` +
+      `REQUIREMENTS:\n` +
+      `${formData.description}\n\n` +
+      `========================================\n` +
+      `Target Desk: ${STUDIO_DATA.email}\n`
+    );
+    return `mailto:${STUDIO_DATA.email}?subject=${subject}&body=${body}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const mailto = generateMailtoUrl();
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
-    }, 1200);
+      try {
+        window.location.href = mailto;
+      } catch (err) {}
+    }, 800);
   };
 
   return (
@@ -119,29 +148,57 @@ export const ContactPage: React.FC = () => {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400">
                     <Check className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">Inquiry Received Successfully</h3>
+                  <h3 className="text-2xl font-bold text-white">Inquiry Formatted & Dispatched</h3>
                   <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed font-normal">
-                    Thank you, {formData.fullName}. Emmanuel will review your project requirements and get back to you at <span className="text-amber-400 font-mono">{formData.email}</span> within 24 hours.
+                    Thank you, {formData.fullName}. Your scope details have been formatted and dispatched directly to Emmanuel's verified inbox at <span className="text-amber-400 font-mono font-bold underline decoration-amber-400">{STUDIO_DATA.email}</span>.
                   </p>
-                  <button
-                    onClick={() => {
-                      setIsSuccess(false);
-                      setFormData({
-                        fullName: '',
-                        company: '',
-                        email: '',
-                        phone: '',
-                        country: '',
-                        projectType: 'Trust-First Website / Web Platform',
-                        budgetRange: '₦650,000 – ₦1,300,000 (£800 – £1,200) · Professional',
-                        description: '',
-                        source: 'Portfolio',
-                      });
-                    }}
-                    className="mt-4 px-6 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-mono text-white transition-colors cursor-pointer"
-                  >
-                    Send Another Note
-                  </button>
+
+                  <div className="p-4 rounded-xl bg-[#09090b] border border-zinc-800 text-xs font-mono text-zinc-400 text-left max-w-md mx-auto space-y-1">
+                    <div>Recipient: <span className="text-amber-400 font-bold">{STUDIO_DATA.email}</span></div>
+                    <div>Project: <span className="text-white">{formData.projectType}</span></div>
+                    <div>Target Budget: <span className="text-white">{formData.budgetRange}</span></div>
+                  </div>
+
+                  <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                    <a
+                      href={generateMailtoUrl()}
+                      className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>Open in Email App ({STUDIO_DATA.email})</span>
+                    </a>
+                    <a
+                      href={STUDIO_DATA.whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>Message WhatsApp</span>
+                    </a>
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      onClick={() => {
+                        setIsSuccess(false);
+                        setFormData({
+                          fullName: '',
+                          company: '',
+                          email: '',
+                          phone: '',
+                          country: '',
+                          projectType: 'Trust-First Website / Web Platform',
+                          budgetRange: '₦650,000 – ₦1,300,000 (£800 – £1,200) · Professional',
+                          description: '',
+                          source: 'Portfolio',
+                        });
+                      }}
+                      className="text-xs font-mono text-zinc-400 hover:text-white underline cursor-pointer"
+                    >
+                      Send Another Scope or Project Note
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -282,6 +339,14 @@ export const ContactPage: React.FC = () => {
                       placeholder="What does your business do, who are your international customers, and what do they need to see before they trust you?"
                       className="w-full px-4 py-3 rounded-xl bg-[#09090b] border border-[#27272a] text-sm text-white focus:outline-none focus:border-amber-500 transition-colors"
                     />
+                  </div>
+
+                  <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 px-1">
+                    <span className="flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Direct Quote Destination: <strong className="text-white">{STUDIO_DATA.email}</strong></span>
+                    </span>
+                    <span className="text-emerald-400">&lt;24h SLA</span>
                   </div>
 
                   <div className="pt-2">

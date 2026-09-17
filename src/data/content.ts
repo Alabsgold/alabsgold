@@ -19,10 +19,10 @@ export const STUDIO_DATA = {
   shortDescription:
     'ALABSGOLD engineers custom web platforms, backend systems, and AI-driven tools for exporters, real estate operators, and diaspora businesses that need to establish instant trust and convert high-value leads — no templates, no page builders, no shortcuts.',
   locationInfo: 'Lagos, Nigeria — serving West Africa, the UK, the US, and global diaspora markets',
-  email: 'hello@alabsgold.com.ng',
+  email: 'alabsgold31@gmail.com',
   secondaryEmail: 'emmaalabi31@gmail.com',
-  leadEmail: 'hello@alabsgold.com.ng',
-  directEmail: 'emmaalabi31@gmail.com',
+  leadEmail: 'alabsgold31@gmail.com',
+  directEmail: 'alabsgold31@gmail.com',
   phone: '+234 703 996 0964',
   whatsappNumber: '+234 703 996 0964',
   whatsappLink: "https://wa.me/2347039960964?text=Hi%20Emmanuel,%20I%20saw%20the%20ALABSGOLD%20site%20and%20I'd%20like%20to%20discuss%20a%20project.",
@@ -655,7 +655,7 @@ export const FOUNDER_DATA = {
   role: 'Founder & Full-Stack Systems Engineer',
   institution: '300-Level Computer Science Student & Studio Lead',
   location: 'Lagos, Nigeria',
-  email: 'hello@alabsgold.com.ng',
+  email: 'alabsgold31@gmail.com',
   personalEmail: 'emmaalabi31@gmail.com',
   title: 'Engineering production-grade digital infrastructure for international trust.',
   bio: [

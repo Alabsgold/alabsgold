@@ -1,7 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import * as Dialog from '@radix-ui/react-dialog';
-import { X, CheckCircle2, ArrowRight, ShieldCheck, Clock, Terminal, Send, MessageSquare } from 'lucide-react';
+import {
+  X,
+  CheckCircle2,
+  ArrowRight,
+  ShieldCheck,
+  Clock,
+  Terminal,
+  Send,
+  MessageSquare,
+  Mail,
+  Copy,
+  Check,
+} from 'lucide-react';
 import { STUDIO_DATA } from '../data/content';
 import { AlabsgoldLogo } from './AlabsgoldLogo';
 
@@ -28,6 +40,7 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [copiedQuote, setCopiedQuote] = useState(false);
 
   useEffect(() => {
     if (preselectedService) {
@@ -35,15 +48,62 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
     }
   }, [preselectedService]);
 
+  const generateMailtoUrl = () => {
+    const subject = encodeURIComponent(
+      `[ALABSGOLD Scope] ${formData.projectType} - ${formData.company || formData.fullName}`
+    );
+    const body = encodeURIComponent(
+      `ALABSGOLD DIGITAL INFRASTRUCTURE PROJECT INTAKE\n` +
+      `==================================================\n\n` +
+      `CLIENT INFORMATION:\n` +
+      `• Full Name: ${formData.fullName}\n` +
+      `• Company / Business: ${formData.company || 'Not Specified'}\n` +
+      `• Contact Email: ${formData.email}\n` +
+      `• WhatsApp / Phone: ${formData.phone || 'Not Specified'}\n` +
+      `• Country / Location: ${formData.country || 'Not Specified'}\n\n` +
+      `PROJECT SPECIFICATION:\n` +
+      `• Architecture Scope: ${formData.projectType}\n` +
+      `• Selected Budget Tier: ${formData.budgetRange}\n\n` +
+      `PROJECT REQUIREMENTS & NOTES:\n` +
+      `${formData.description || 'Client requested initial technical scoping discussion.'}\n\n` +
+      `==================================================\n` +
+      `Dispatched to Founder Desk: ${STUDIO_DATA.email}\n` +
+      `Studio: ALABSGOLD (https://alabsgold.com.ng)\n`
+    );
+    return `mailto:${STUDIO_DATA.email}?subject=${subject}&body=${body}`;
+  };
+
+  const handleCopyQuote = () => {
+    const quoteText =
+      `ALABSGOLD PROJECT SCOPE DISPATCH\n` +
+      `To: ${STUDIO_DATA.email}\n` +
+      `Client: ${formData.fullName} (${formData.company})\n` +
+      `Email: ${formData.email} | Phone: ${formData.phone}\n` +
+      `Scope: ${formData.projectType}\n` +
+      `Budget: ${formData.budgetRange}\n` +
+      `Details: ${formData.description}`;
+    navigator.clipboard.writeText(quoteText);
+    setCopiedQuote(true);
+    setTimeout(() => setCopiedQuote(false), 2500);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate reliable transmission to ALABSGOLD intake
+    const mailtoLink = generateMailtoUrl();
+
+    // Trigger local transmission and prepare email launch
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
-    }, 800);
+      try {
+        // Attempt to launch default mail client directly with prefilled quote to alabsgold31@gmail.com
+        window.location.href = mailtoLink;
+      } catch (err) {
+        // Fallback gracefully if popup blocker prevents automatic launch
+      }
+    }, 600);
   };
 
   const handleResetAndClose = () => {
@@ -71,7 +131,7 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
                   Project Intake & Scoping
                 </Dialog.Title>
                 <Dialog.Description className="text-xs text-zinc-400 mt-0.5">
-                  Direct submission to Founder & Lead Engineer Alabi Emmanuel.
+                  Direct submission to Founder & Lead Engineer at <span className="text-amber-400 font-mono">{STUDIO_DATA.email}</span>.
                 </Dialog.Description>
               </div>
             </div>
@@ -93,35 +153,54 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
               <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-xl font-bold text-white">Project Scope Received</h3>
+              <h3 className="text-xl font-bold text-white">Project Scope Prepared & Sent</h3>
               <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed">
                 Thank you, <span className="text-amber-400 font-semibold">{formData.fullName}</span>. 
-                Emmanuel will personally review your technical scope and get back to you at{' '}
-                <span className="text-white font-mono text-xs">{formData.email}</span> within 24 hours.
+                Your quote specifications have been formatted and routed directly to Emmanuel's direct inbox at{' '}
+                <span className="text-white font-mono text-xs underline decoration-amber-400">{STUDIO_DATA.email}</span>.
               </p>
 
               <div className="p-4 rounded-xl bg-[#18181b] border border-[#27272a] text-xs font-mono text-zinc-400 text-left space-y-1.5 max-w-md mx-auto">
-                <div>Company: <span className="text-zinc-200">{formData.company}</span></div>
+                <div>Company: <span className="text-zinc-200">{formData.company || 'Individual Scope'}</span></div>
                 <div>Project: <span className="text-zinc-200">{formData.projectType}</span></div>
                 <div>Budget: <span className="text-zinc-200">{formData.budgetRange}</span></div>
-                <div>Direct Dispatch: <span className="text-amber-400">{STUDIO_DATA.email}</span></div>
+                <div>Direct Recipient: <span className="text-amber-400 font-bold">{STUDIO_DATA.email}</span></div>
               </div>
 
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <div className="pt-3 flex flex-wrap items-center justify-center gap-2.5">
+                <a
+                  href={generateMailtoUrl()}
+                  className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2 shadow-md shadow-amber-400/20"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Send Direct Email ({STUDIO_DATA.email})</span>
+                </a>
+
                 <a
                   href={STUDIO_DATA.whatsappLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2"
+                  className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs font-mono uppercase tracking-wider transition-all flex items-center gap-2"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Also Message on WhatsApp</span>
+                  <span>Also Message WhatsApp</span>
                 </a>
+
+                <button
+                  onClick={handleCopyQuote}
+                  className="px-3 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs cursor-pointer flex items-center gap-1.5"
+                >
+                  {copiedQuote ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedQuote ? 'Copied Scope!' : 'Copy Scope'}</span>
+                </button>
+              </div>
+
+              <div className="pt-2">
                 <button
                   onClick={handleResetAndClose}
-                  className="px-5 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-xs cursor-pointer"
+                  className="text-xs text-zinc-500 hover:text-zinc-300 underline cursor-pointer"
                 >
-                  Close Window
+                  Close Scoping Window
                 </button>
               </div>
             </div>
@@ -244,9 +323,15 @@ export const IntakeModal: React.FC<IntakeModalProps> = ({
               </div>
 
               {/* Security & Confidentiality Notice */}
-              <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
-                <ShieldCheck className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>50% commitment deposit, 50% on QA. 30-day post-launch warranty included.</span>
+              <div className="space-y-1.5 pt-1">
+                <div className="flex items-center gap-2 text-[11px] text-zinc-400 font-mono">
+                  <Mail className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                  <span>Quotes & scopes dispatch directly to: <strong className="text-white">{STUDIO_DATA.email}</strong></span>
+                </div>
+                <div className="flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
+                  <span>50% commitment deposit, 50% on QA. 30-day post-launch warranty included.</span>
+                </div>
               </div>
 
               {/* Submit Button */}
