@@ -8,6 +8,9 @@ import { Footer } from './components/Footer';
 import { IntakeModal } from './components/IntakeModal';
 import { QuickReachModal } from './components/QuickReachModal';
 import { GoogleSheetsHubModal } from './components/GoogleSheetsHubModal';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { CookiePreferencesModal } from './components/CookiePreferencesModal';
+import { PrivacyRightsModal } from './components/PrivacyRightsModal';
 import { GoldMouseSpotlight } from './components/GoldMouseSpotlight';
 import { Zap, MessageSquare } from 'lucide-react';
 
@@ -35,6 +38,8 @@ function MainLayout() {
   const [isQuickReachOpen, setIsQuickReachOpen] = useState(false);
   const [quickReachCategory, setQuickReachCategory] = useState<'Service Scoping' | 'Product Inquiry' | 'Client Review' | 'Quick Question' | 'Advisory'>('Quick Question');
   const [isSheetsHubOpen, setIsSheetsHubOpen] = useState(false);
+  const [isCookiePreferencesOpen, setIsCookiePreferencesOpen] = useState(false);
+  const [isPrivacyNoticeOpen, setIsPrivacyNoticeOpen] = useState(false);
 
   // Framer Motion useScroll hook for the fixed gold progress indicator
   const { scrollYProgress } = useScroll();
@@ -93,6 +98,18 @@ function MainLayout() {
       location.hash === '#founder-ledger'
     ) {
       setIsSheetsHubOpen(true);
+    } else if (
+      location.pathname === '/privacy' ||
+      location.pathname === '/privacy-policy' ||
+      location.hash === '#privacy'
+    ) {
+      setIsPrivacyNoticeOpen(true);
+    } else if (
+      location.pathname === '/cookies' ||
+      location.pathname === '/cookie-policy' ||
+      location.hash === '#cookies'
+    ) {
+      setIsCookiePreferencesOpen(true);
     }
   }, [location.pathname, location.hash]);
 
@@ -195,6 +212,8 @@ function MainLayout() {
           onOpenIntake={() => handleOpenIntake()}
           onOpenQuickReach={() => handleOpenQuickReach('Client Review')}
           onOpenFounderConsole={() => setIsSheetsHubOpen(true)}
+          onOpenCookiePreferences={() => setIsCookiePreferencesOpen(true)}
+          onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
         />
 
         {/* Interactive Consultation Intake Dialog */}
@@ -211,10 +230,36 @@ function MainLayout() {
           defaultCategory={quickReachCategory}
         />
 
-        {/* Google Sheets Live Ledger Hub */}
+        {/* Google Sheets Live Ledger Hub (Founder Desk) */}
         <GoogleSheetsHubModal
           isOpen={isSheetsHubOpen}
           onClose={() => setIsSheetsHubOpen(false)}
+        />
+
+        {/* NDPR & GDPR Cookie & Permission Consent Banner */}
+        <CookieConsentBanner
+          onOpenPreferences={() => setIsCookiePreferencesOpen(true)}
+          onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
+        />
+
+        {/* Granular Cookie Preferences & Permission Center Modal */}
+        <CookiePreferencesModal
+          isOpen={isCookiePreferencesOpen}
+          onClose={() => setIsCookiePreferencesOpen(false)}
+          onOpenPrivacyNotice={() => {
+            setIsCookiePreferencesOpen(false);
+            setIsPrivacyNoticeOpen(true);
+          }}
+        />
+
+        {/* Statutory NDPR & GDPR Data Subject Rights Modal */}
+        <PrivacyRightsModal
+          isOpen={isPrivacyNoticeOpen}
+          onClose={() => setIsPrivacyNoticeOpen(false)}
+          onOpenCookiePreferences={() => {
+            setIsPrivacyNoticeOpen(false);
+            setIsCookiePreferencesOpen(true);
+          }}
         />
       </motion.div>
     </>

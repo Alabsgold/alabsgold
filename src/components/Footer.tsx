@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, ArrowUp, Mail, Globe, Terminal, Activity, CheckCircle2, MessageSquare, Zap, Lock } from 'lucide-react';
+import { Shield, ArrowUp, Mail, Globe, Terminal, Activity, CheckCircle2, MessageSquare, Zap, Lock, Cookie, ShieldCheck } from 'lucide-react';
 import { STUDIO_DATA, FOUNDER_DATA } from '../data/content';
 import { AlabsgoldLogo } from './AlabsgoldLogo';
 
@@ -8,9 +8,17 @@ interface FooterProps {
   onOpenIntake: () => void;
   onOpenQuickReach?: () => void;
   onOpenFounderConsole?: () => void;
+  onOpenCookiePreferences?: () => void;
+  onOpenPrivacyNotice?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenIntake, onOpenQuickReach, onOpenFounderConsole }) => {
+export const Footer: React.FC<FooterProps> = ({
+  onOpenIntake,
+  onOpenQuickReach,
+  onOpenFounderConsole,
+  onOpenCookiePreferences,
+  onOpenPrivacyNotice,
+}) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -114,6 +122,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenIntake, onOpenQuickReach, 
                   Contact Us / Start a Project
                 </Link>
               </li>
+              {onOpenPrivacyNotice && (
+                <li>
+                  <button
+                    onClick={onOpenPrivacyNotice}
+                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  >
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Privacy & NDPR/GDPR Rights</span>
+                  </button>
+                </li>
+              )}
+              {onOpenCookiePreferences && (
+                <li>
+                  <button
+                    onClick={onOpenCookiePreferences}
+                    className="hover:text-white transition-colors text-left cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Cookie className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Cookie & Storage Settings</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -175,7 +205,25 @@ export const Footer: React.FC<FooterProps> = ({ onOpenIntake, onOpenQuickReach, 
             )}
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            {onOpenCookiePreferences && (
+              <button
+                onClick={onOpenCookiePreferences}
+                className="hover:text-amber-400 transition-colors cursor-pointer flex items-center gap-1 text-[11px]"
+              >
+                <Cookie className="w-3 h-3 text-amber-400" />
+                <span>Cookie Settings</span>
+              </button>
+            )}
+            {onOpenPrivacyNotice && (
+              <button
+                onClick={onOpenPrivacyNotice}
+                className="hover:text-emerald-400 transition-colors cursor-pointer flex items-center gap-1 text-[11px]"
+              >
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                <span>NDPR · GDPR Rights</span>
+              </button>
+            )}
             <Link to="/about" className="hover:text-zinc-300 transition-colors">
               Engineering Invariants
             </Link>
