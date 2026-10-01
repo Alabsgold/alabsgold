@@ -13,13 +13,14 @@ export interface SEOProps {
 /**
  * useSEO: Dynamically injects meta tags, Open Graph cards, Twitter cards,
  * canonical URLs, and Schema.org JSON-LD structured data per route.
+ * Canonical domain: https://alabsgold.vercel.app
  */
 export function useSEO({
   title,
   description,
   keywords,
   ogType = 'website',
-  ogImage,
+  ogImage = 'https://alabsgold.vercel.app/og-image.png',
   canonicalPath,
   structuredData,
 }: SEOProps) {
@@ -27,7 +28,7 @@ export function useSEO({
     // 1. Format and set page title
     const formattedTitle = title.includes('ALABSGOLD')
       ? title
-      : `${title} | ALABSGOLD — Digital Infrastructure Studio`;
+      : `${title} | ALABSGOLD — Boutique Web Engineering Studio`;
     document.title = formattedTitle;
 
     // Helper function to safely set or create meta elements
@@ -47,36 +48,27 @@ export function useSEO({
       setMeta('name', 'keywords', keywords.join(', '));
     }
 
-    // 3. Resolve Current Canonical URL
-    const origin =
-      typeof window !== 'undefined' && window.location.origin
-        ? window.location.origin
-        : 'https://alabsgold.com.ng';
-
+    // 3. Resolve Current Canonical URL on Production Domain
+    const canonicalBase = 'https://alabsgold.vercel.app';
     const currentUrl = canonicalPath
-      ? `${origin}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`
-      : typeof window !== 'undefined'
-      ? window.location.href
-      : origin;
+      ? `${canonicalBase}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`
+      : canonicalBase;
 
     // 4. OpenGraph Metadata
     setMeta('property', 'og:title', formattedTitle);
     setMeta('property', 'og:description', description);
     setMeta('property', 'og:type', ogType);
     setMeta('property', 'og:url', currentUrl);
-    setMeta('property', 'og:site_name', 'ALABSGOLD Studio');
-
-    if (ogImage) {
-      setMeta('property', 'og:image', ogImage);
-    }
+    setMeta('property', 'og:site_name', 'ALABSGOLD');
+    setMeta('property', 'og:image', ogImage);
+    setMeta('property', 'og:image:width', '1200');
+    setMeta('property', 'og:image:height', '630');
 
     // 5. Twitter / X Card Metadata
     setMeta('name', 'twitter:card', 'summary_large_image');
     setMeta('name', 'twitter:title', formattedTitle);
     setMeta('name', 'twitter:description', description);
-    if (ogImage) {
-      setMeta('name', 'twitter:image', ogImage);
-    }
+    setMeta('name', 'twitter:image', ogImage);
 
     // 6. Canonical Link Element
     let link = document.querySelector('link[rel="canonical"]');
@@ -87,18 +79,24 @@ export function useSEO({
     }
     link.setAttribute('href', currentUrl);
 
-    // 7. Schema.org JSON-LD Structured Data
+    // 7. Schema.org JSON-LD Structured Data (strictly sanitize priceRange)
     const scriptId = 'alabsgold-schema-structured-data';
     let scriptTag = document.getElementById(scriptId) as HTMLScriptElement | null;
 
     if (structuredData) {
+      const sanitizedData = { ...structuredData };
+      delete (sanitizedData as any).priceRange;
+      if (typeof sanitizedData.url === 'string' && (sanitizedData.url.includes('ais-dev') || sanitizedData.url.includes('run.app'))) {
+        sanitizedData.url = currentUrl;
+      }
+
       if (!scriptTag) {
         scriptTag = document.createElement('script');
         scriptTag.id = scriptId;
         scriptTag.type = 'application/ld+json';
         document.head.appendChild(scriptTag);
       }
-      scriptTag.text = JSON.stringify(structuredData);
+      scriptTag.text = JSON.stringify(sanitizedData);
     } else if (scriptTag) {
       scriptTag.remove();
     }

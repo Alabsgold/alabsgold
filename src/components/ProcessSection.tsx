@@ -1,208 +1,135 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { PROCESS_PHASES, WHAT_WE_DONT_DO } from '../data/content';
-import { InteractiveProjectTimeline } from './InteractiveProjectTimeline';
-import {
-  Check,
-  ShieldCheck,
-  Zap,
-  Code2,
-  AlertTriangle,
-  Layers,
-  Sparkles,
-} from 'lucide-react';
+import React from 'react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ProcessSectionProps {
-  onOpenIntake?: (serviceOrPhase?: string) => void;
+  onOpenIntake?: (phase?: string) => void;
 }
 
 export const ProcessSection: React.FC<ProcessSectionProps> = ({ onOpenIntake }) => {
-  const [viewMode, setViewMode] = useState<'timeline' | 'grid'>('timeline');
+  const steps = [
+    {
+      number: '01',
+      title: 'Discovery & Scope Lock',
+      timeline: 'Days 1 – 2',
+      description:
+        'We map your operational workflows, define system invariants, and establish a fixed-price specification. Scope is locked in writing with a 50% milestone commitment—protecting you from surprise costs.',
+      deliverables: ['Functional PRD & Invariants', 'Fixed Timeline & Milestone Guarantee', 'Zero Budget Drift Contract'],
+    },
+    {
+      number: '02',
+      title: 'Architecture & Specifications',
+      timeline: 'Days 3 – 4',
+      description:
+        'We design database schemas, API contracts (API_CONTRACT.md), and wireframes. We resolve edge cases on paper before touching production code, ensuring swift and unblocked execution.',
+      deliverables: ['Database Schema & Invariants', 'API Contract Specification', 'Interface Wireframe Review'],
+    },
+    {
+      number: '03',
+      title: 'Sprint Build & Security Review',
+      timeline: 'Days 5 – 8',
+      description:
+        'We build your bespoke system without bloated page builders. Includes custom quotation wizards, payment webhook HMAC audits, idempotency guards, and your private backoffice CMS.',
+      deliverables: ['100% Bespoke Codebase', 'HMAC Webhook Verification', 'Private Admin Backoffice (/studio)'],
+    },
+    {
+      number: '04',
+      title: 'Production QA & Handover',
+      timeline: 'Days 9 – 10',
+      description:
+        'We tune Core Web Vitals for sub-second mobile delivery, deploy to lean production servers, and conduct client QA. Full source code and IP are transferred upon final sign-off.',
+      deliverables: ['Core Web Vitals Optimization', 'VPS / Cloud Server Setup', '100% IP & Private Git Handover'],
+    },
+  ];
 
   return (
-    <section id="process" className="bg-[#09090b] relative text-[#f4f4f5]">
-      {/* Primary Interactive Project Timeline Component */}
-      <InteractiveProjectTimeline
-        id="timeline-interactive"
-        onOpenIntake={onOpenIntake}
-        className="border-t-0"
-      />
-
-      {/* Additional Studio Methodology & Boundaries */}
-      <div className="pb-28 bg-[#09090b] relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Quick Matrix Grid Toggle Banner */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-2xl bg-[#111114] border border-[#27272a] mb-8">
-            <div className="flex items-center gap-3">
-              <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-amber-400">
-                <Layers className="w-4 h-4" />
-              </div>
-              <div>
-                <div className="text-xs font-mono font-bold text-white uppercase tracking-wider">
-                  Methodology View Configuration
-                </div>
-                <div className="text-xs text-zinc-400">
-                  Switch between interactive stage-by-stage walkthrough and 5-phase comparative summary grid.
-                </div>
-              </div>
-            </div>
-
-            <div className="inline-flex p-1 rounded-xl bg-[#18181b] border border-[#27272a] font-mono text-xs">
-              <button
-                onClick={() => setViewMode('timeline')}
-                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
-                  viewMode === 'timeline'
-                    ? 'bg-amber-400 text-black font-bold shadow'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Interactive Timeline
-              </button>
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
-                  viewMode === 'grid'
-                    ? 'bg-amber-400 text-black font-bold shadow'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                5-Phase Grid Matrix
-              </button>
-            </div>
+    <section className="relative py-20 sm:py-28 bg-slate-50/40 dark:bg-[#0c0c0f]/40 backdrop-blur-md border-b border-white/20 dark:border-white/5 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16">
+          <div className="text-xs font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400 mb-2">
+            03 · How We Work
           </div>
-
-          {/* Conditional 5-Phase Comparative Summary Grid */}
-          {viewMode === 'grid' && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mb-14"
-            >
-              <div className="mb-6">
-                <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-bold">
-                  5 COMPRESSED PHASES · SUMMARY MATRIX
-                </span>
-                <h3 className="text-2xl font-extrabold text-white mt-1">
-                  At-a-Glance Delivery Overview
-                </h3>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                {PROCESS_PHASES.map((phase, index) => (
-                  <motion.div
-                    key={phase.step}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    whileHover={{
-                      y: -4,
-                      borderColor: 'rgba(245, 158, 11, 0.4)',
-                      boxShadow: '0 0 25px rgba(245, 158, 11, 0.1)',
-                    }}
-                    className="rounded-2xl bg-[#111114] border border-[#27272a] p-5 flex flex-col justify-between transition-all group"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
-                        <span className="text-2xl font-extrabold font-mono text-zinc-600 group-hover:text-amber-400 transition-colors">
-                          {phase.step}
-                        </span>
-                        <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-zinc-800 text-amber-400 border border-zinc-700">
-                          {phase.timeline}
-                        </span>
-                      </div>
-
-                      <h4 className="mt-4 text-base font-bold text-white leading-snug">
-                        Phase {phase.step}: {phase.name}
-                      </h4>
-                      <p className="mt-2 text-xs text-zinc-400 leading-relaxed font-normal">
-                        {phase.summary}
-                      </p>
-                    </div>
-
-                    <div className="mt-5 pt-3 border-t border-zinc-800/80">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block mb-2 font-semibold">
-                        Deliverables:
-                      </span>
-                      <div className="space-y-1.5">
-                        {phase.deliverables.map((deliv, idx) => (
-                          <div key={idx} className="flex items-start gap-2 text-xs text-zinc-300">
-                            <Check className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" />
-                            <span className="leading-snug">{deliv}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* Proprietary Framework Callout Banner */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl bg-gradient-to-r from-[#111114] via-[#16161a] to-[#111114] border border-amber-500/30 p-6 sm:p-8 relative overflow-hidden shadow-xl"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-              <div className="md:col-span-8 space-y-2">
-                <div className="inline-flex items-center gap-2 text-xs font-mono text-amber-400 font-bold">
-                  <Code2 className="w-4 h-4" />
-                  <span>ACCELERATED EXECUTION ARCHITECTURE</span>
-                </div>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-white">
-                  The <code className="text-amber-400">alabsgold-core</code> Framework Advantage
-                </h3>
-                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
-                  Because we reuse our vetted base scaffolding for auth, role-based access control (RBAC), and transactional logging, projects move from concept to working prototype in days, not months. We don't spend your budget writing standard boilerplate.
-                </p>
-              </div>
-              <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-2.5 text-xs font-mono">
-                <div className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 text-zinc-300 flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>Zero-Depreciation Scaffolding</span>
-                </div>
-                <div className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 text-zinc-300 flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                  <span>10 – 20 Day Typical Turnaround</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* What We Don't Do Section from Section 6 */}
-          <div className="mt-14">
-            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-4 flex items-center gap-2">
-              <AlertTriangle className="w-4 h-4 text-amber-400" />
-              <span>EXPLICIT BOUNDARIES · WHAT WE NEVER DO</span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {WHAT_WE_DONT_DO.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-2xl bg-[#111114] border border-[#27272a] hover:border-red-500/30 transition-colors"
-                >
-                  <div className="text-xs font-mono font-bold text-red-400 mb-2">
-                    0{idx + 1} · RULE
-                  </div>
-                  <h4 className="text-sm font-bold text-white mb-2">
-                    {item.title}
-                  </h4>
-                  <p className="text-xs text-zinc-400 leading-relaxed font-normal">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            A Disciplined Delivery Process With Zero Surprises.
+          </h2>
+          <p className="mt-3 text-base sm:text-lg text-slate-600 dark:text-zinc-400 leading-relaxed font-normal">
+            We operate on fixed milestones, transparent timelines, and deterministic deliverables. You know exactly what is being built, when it will ship, and what it costs.
+          </p>
         </div>
+
+        {/* 4 Steps Grid: OS 26 Liquid Glass Translucent Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step) => (
+            <div
+              key={step.number}
+              className="p-6 rounded-2xl bg-white/55 dark:bg-zinc-900/40 backdrop-blur-xl border border-white/40 dark:border-white/10 flex flex-col justify-between shadow-[0_8px_32px_0_rgba(0,0,0,0.04)] hover:border-amber-500/50 transition-all duration-300"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-200/60 dark:border-white/5">
+                  <span className="text-2xl font-black font-mono text-amber-500">
+                    {step.number}
+                  </span>
+                  <span className="text-xs font-mono font-medium text-slate-600 dark:text-zinc-400 px-2.5 py-0.5 rounded-full bg-slate-200/50 dark:bg-white/5 border border-white/40 dark:border-white/10 backdrop-blur-md">
+                    {step.timeline}
+                  </span>
+                </div>
+
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+                  {step.title}
+                </h3>
+
+                <p className="mt-2.5 text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-normal">
+                  {step.description}
+                </p>
+
+                <div className="mt-5 pt-4 border-t border-slate-200/60 dark:border-white/5">
+                  <h4 className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 dark:text-zinc-500 mb-2 font-mono">
+                    Key Outputs:
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-slate-600 dark:text-zinc-400">
+                    {step.deliverables.map((d, i) => (
+                      <li key={i} className="flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <span>{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-white/5">
+                <button
+                  onClick={() => onOpenIntake?.(`Process Step ${step.number}: ${step.title}`)}
+                  className="w-full text-center text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:text-amber-500 dark:hover:text-amber-400 transition-colors py-1 cursor-pointer"
+                >
+                  Start at Step {step.number} →
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Section Next Step */}
+        <div className="mt-12 p-6 rounded-2xl bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl border border-white/40 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+          <div>
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+              Ready to lock your scope and reserve a delivery sprint?
+            </h4>
+            <p className="text-xs text-slate-500 dark:text-zinc-400 mt-0.5">
+              We take on a limited number of client engagements each month to maintain zero-defect standards.
+            </p>
+          </div>
+          <button
+            onClick={() => onOpenIntake?.('Sprint Reservation')}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider text-black bg-amber-400 hover:bg-amber-300 transition-colors cursor-pointer shadow-sm whitespace-nowrap"
+          >
+            <span>Reserve Engineering Sprint</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
       </div>
     </section>
   );

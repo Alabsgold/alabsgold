@@ -1,28 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Lenis from 'lenis';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
-import { Preloader } from './components/Preloader';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { IntakeModal } from './components/IntakeModal';
-import { QuickReachModal } from './components/QuickReachModal';
-import { GoogleSheetsHubModal } from './components/GoogleSheetsHubModal';
-import { CookieConsentBanner } from './components/CookieConsentBanner';
-import { CookiePreferencesModal } from './components/CookiePreferencesModal';
-import { PrivacyRightsModal } from './components/PrivacyRightsModal';
 import { GlobalLogoWallpaper } from './components/GlobalLogoWallpaper';
-import { PerformanceSeoAudit } from './components/PerformanceSeoAudit';
-import { GoldMouseSpotlight } from './components/GoldMouseSpotlight';
-import { Zap, MessageSquare } from 'lucide-react';
 
-// Dedicated Page Components
+// Homepage loaded directly for instant initial execution
 import { HomePage } from './pages/HomePage';
-import { ServicesPage } from './pages/ServicesPage';
-import { ProductsPage } from './pages/ProductsPage';
-import { FounderPage } from './pages/FounderPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
+
+// Dedicated secondary routes code-split for sub-second performance
+const ServicesPage = lazy(() => import('./pages/ServicesPage').then(m => ({ default: m.ServicesPage })));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then(m => ({ default: m.ProductsPage })));
+const FounderPage = lazy(() => import('./pages/FounderPage').then(m => ({ default: m.FounderPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
+
+// Lazy-load interactive modals on demand so they don't delay the initial paint
+const IntakeModal = lazy(() => import('./components/IntakeModal').then(m => ({ default: m.IntakeModal })));
+const CookieConsentBanner = lazy(() => import('./components/CookieConsentBanner').then(m => ({ default: m.CookieConsentBanner })));
+const CookiePreferencesModal = lazy(() => import('./components/CookiePreferencesModal').then(m => ({ default: m.CookiePreferencesModal })));
+const PrivacyRightsModal = lazy(() => import('./components/PrivacyRightsModal').then(m => ({ default: m.PrivacyRightsModal })));
 
 // Scroll Restoration on Route Transition
 function ScrollToTopOnRoute() {
@@ -33,87 +29,55 @@ function ScrollToTopOnRoute() {
   return null;
 }
 
+// Minimal fallback loader
+function RouteLoader() {
+  return (
+    <div className="min-h-[50vh] flex items-center justify-center">
+      <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
+
 function MainLayout() {
-  const [showPreloader, setShowPreloader] = useState(true);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [isIntakeOpen, setIsIntakeOpen] = useState(false);
   const [preselectedService, setPreselectedService] = useState<string | undefined>(undefined);
-  const [isQuickReachOpen, setIsQuickReachOpen] = useState(false);
-  const [quickReachCategory, setQuickReachCategory] = useState<'Service Scoping' | 'Product Inquiry' | 'Client Review' | 'Quick Question' | 'Advisory'>('Quick Question');
-  const [isSheetsHubOpen, setIsSheetsHubOpen] = useState(false);
   const [isCookiePreferencesOpen, setIsCookiePreferencesOpen] = useState(false);
   const [isPrivacyNoticeOpen, setIsPrivacyNoticeOpen] = useState(false);
 
-  // Framer Motion useScroll hook for the fixed gold progress indicator
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  // Initialize Lenis smooth scroll
+  // Initialize and synchronize theme
   useEffect(() => {
-    let lenis: Lenis | null = null;
     try {
-      lenis = new Lenis({
-        duration: 1.1,
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        smoothWheel: true,
-      });
-
-      let animationFrameId: number;
-      const raf = (time: number) => {
-        lenis?.raf(time);
-        animationFrameId = requestAnimationFrame(raf);
-      };
-
-      animationFrameId = requestAnimationFrame(raf);
-
-      return () => {
-        cancelAnimationFrame(animationFrameId);
-        lenis?.destroy();
-      };
-    } catch (e) {
-      console.warn('Lenis smooth scroll initialized with fallback:', e);
-    }
-  }, []);
-
-  // Hidden Founder Desk shortcut: Ctrl+Shift+L or Cmd+Shift+L
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'L' || e.key === 'l' || e.key === 'A' || e.key === 'a')) {
-        e.preventDefault();
-        setIsSheetsHubOpen((prev) => !prev);
+      const saved = localStorage.getItem('alabsgold_theme');
+      if (saved === 'dark') {
+        setTheme('dark');
+        document.documentElement.classList.add('dark');
+        document.documentElement.classList.remove('light');
+      } else {
+        setTheme('light');
+        document.documentElement.classList.add('light');
+        document.documentElement.classList.remove('dark');
       }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    } catch (e) {
+      setTheme('light');
+    }
   }, []);
 
-  const location = useLocation();
-  useEffect(() => {
-    if (
-      location.pathname === '/admin' ||
-      location.pathname === '/founder-ledger' ||
-      location.pathname === '/studio-vault' ||
-      location.hash === '#founder-ledger'
-    ) {
-      setIsSheetsHubOpen(true);
-    } else if (
-      location.pathname === '/privacy' ||
-      location.pathname === '/privacy-policy' ||
-      location.hash === '#privacy'
-    ) {
-      setIsPrivacyNoticeOpen(true);
-    } else if (
-      location.pathname === '/cookies' ||
-      location.pathname === '/cookie-policy' ||
-      location.hash === '#cookies'
-    ) {
-      setIsCookiePreferencesOpen(true);
+  const handleToggleTheme = () => {
+    const nextTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(nextTheme);
+    try {
+      localStorage.setItem('alabsgold_theme', nextTheme);
+    } catch (e) {}
+
+    if (nextTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
     }
-  }, [location.pathname, location.hash]);
+  };
 
   const handleOpenIntake = (serviceTitle?: string) => {
     setPreselectedService(serviceTitle);
@@ -125,65 +89,23 @@ function MainLayout() {
     setPreselectedService(undefined);
   };
 
-  const handleOpenQuickReach = (category: 'Service Scoping' | 'Product Inquiry' | 'Client Review' | 'Quick Question' | 'Advisory' = 'Quick Question') => {
-    setQuickReachCategory(category);
-    setIsQuickReachOpen(true);
-  };
-
-  const handleReplayIntro = () => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    setShowPreloader(true);
-  };
-
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-[#09090b] dark:text-zinc-100 transition-colors duration-150 relative">
       <ScrollToTopOnRoute />
 
-      {/* Fixed 2px Gold Scroll Progress Indicator at top of viewport */}
-      <motion.div
-        id="gold-scroll-progress-bar"
-        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 via-amber-400 to-amber-300 origin-left z-[9990] shadow-[0_0_12px_rgba(245,158,11,0.9),0_0_4px_rgba(251,191,36,0.7)] pointer-events-none"
-        style={{ scaleX }}
-      />
-
-      {/* Full-screen Black Preloader with Gold Shimmer & Scale-Out Exit */}
-      <AnimatePresence mode="wait">
-        {showPreloader && (
-          <Preloader
-            key="studio-preloader"
-            onComplete={() => setShowPreloader(false)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Subtle "almost invisible" brand logo wallpaper across every page */}
+      {/* Fixed Architectural Vector Logo Wallpaper: Translucent with OS 26 ambient aura */}
       <GlobalLogoWallpaper />
 
-      {/* Main Website Application Container */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: showPreloader ? 0 : 1,
-        }}
-        transition={{
-          duration: 0.8,
-          delay: 0.1,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-        className="min-h-screen bg-[#09090b] text-[#f4f4f5] flex flex-col selection:bg-amber-500/25 selection:text-amber-300 relative z-10"
-      >
-        {/* Ambient Gold Mouse Spotlight follower */}
-        <GoldMouseSpotlight />
+      {/* Sticky Corporate Header */}
+      <Navbar
+        onOpenIntake={() => handleOpenIntake()}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
+      />
 
-        {/* Global Navigation - Public facing only */}
-        <Navbar
-          onOpenIntake={() => handleOpenIntake()}
-          onOpenQuickReach={() => handleOpenQuickReach('Quick Question')}
-          onReplayPreloader={handleReplayIntro}
-        />
-
-        {/* Multi-Page Route Outlet */}
-        <main className="flex-grow">
+      {/* Multi-Page Route Viewport with Translucent Liquid Glass Content Layers */}
+      <main className="flex-grow relative z-10">
+        <Suspense fallback={<RouteLoader />}>
           <Routes>
             <Route path="/" element={<HomePage onOpenIntake={handleOpenIntake} />} />
             <Route path="/services" element={<ServicesPage onOpenIntake={handleOpenIntake} />} />
@@ -191,85 +113,59 @@ function MainLayout() {
             <Route path="/founder" element={<FounderPage onOpenIntake={handleOpenIntake} />} />
             <Route path="/about" element={<AboutPage onOpenIntake={handleOpenIntake} />} />
             <Route path="/contact" element={<ContactPage />} />
-            {/* Private founder ledger routes */}
-            <Route path="/admin" element={<HomePage onOpenIntake={handleOpenIntake} />} />
-            <Route path="/founder-ledger" element={<HomePage onOpenIntake={handleOpenIntake} />} />
-            <Route path="/studio-vault" element={<HomePage onOpenIntake={handleOpenIntake} />} />
             {/* Catch-all fallback */}
             <Route path="*" element={<HomePage onOpenIntake={handleOpenIntake} />} />
           </Routes>
-        </main>
+        </Suspense>
+      </main>
 
-        {/* Global Footer */}
+      {/* Footer */}
+      <div className="relative z-10">
         <Footer
           onOpenIntake={() => handleOpenIntake()}
-          onOpenQuickReach={() => handleOpenQuickReach('Client Review')}
-          onOpenFounderConsole={() => setIsSheetsHubOpen(true)}
+          onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
           onOpenCookiePreferences={() => setIsCookiePreferencesOpen(true)}
+        />
+      </div>
+
+      {/* Modals loaded only on demand via Suspense */}
+      <Suspense fallback={null}>
+        {isIntakeOpen && (
+          <IntakeModal
+            isOpen={isIntakeOpen}
+            onClose={handleCloseIntake}
+            preselectedService={preselectedService}
+          />
+        )}
+
+        <CookieConsentBanner
+          onOpenPreferences={() => setIsCookiePreferencesOpen(true)}
           onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
         />
-      </motion.div>
 
-      {/* Floating Client Quick Reach Button - Anchored to Browser Viewport */}
-      <aside aria-label="Quick Reach Out" className="fixed bottom-6 right-6 z-40 flex items-center">
-        <button
-          onClick={() => handleOpenQuickReach('Quick Question')}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-black font-semibold text-xs font-mono tracking-wider transition-all shadow-xl shadow-amber-500/20 active:scale-95 cursor-pointer"
-        >
-          <Zap className="w-3.5 h-3.5 fill-black" />
-          <span>Quick Reach / Review</span>
-        </button>
-      </aside>
+        {isCookiePreferencesOpen && (
+          <CookiePreferencesModal
+            isOpen={isCookiePreferencesOpen}
+            onClose={() => setIsCookiePreferencesOpen(false)}
+            onOpenPrivacyNotice={() => {
+              setIsCookiePreferencesOpen(false);
+              setIsPrivacyNoticeOpen(true);
+            }}
+          />
+        )}
 
-      {/* Interactive Consultation Intake Dialog */}
-      <IntakeModal
-        isOpen={isIntakeOpen}
-        onClose={handleCloseIntake}
-        preselectedService={preselectedService}
-      />
-
-      {/* Rapid Interaction & Review Modal with Auto-Mail */}
-      <QuickReachModal
-        isOpen={isQuickReachOpen}
-        onClose={() => setIsQuickReachOpen(false)}
-        defaultCategory={quickReachCategory}
-      />
-
-      {/* Google Sheets Live Ledger Hub (Founder Desk) */}
-      <GoogleSheetsHubModal
-        isOpen={isSheetsHubOpen}
-        onClose={() => setIsSheetsHubOpen(false)}
-      />
-
-      {/* NDPR & GDPR Cookie & Permission Consent Banner - Anchored to Viewport Bottom */}
-      <CookieConsentBanner
-        onOpenPreferences={() => setIsCookiePreferencesOpen(true)}
-        onOpenPrivacyNotice={() => setIsPrivacyNoticeOpen(true)}
-      />
-
-      {/* Granular Cookie Preferences & Permission Center Modal */}
-      <CookiePreferencesModal
-        isOpen={isCookiePreferencesOpen}
-        onClose={() => setIsCookiePreferencesOpen(false)}
-        onOpenPrivacyNotice={() => {
-          setIsCookiePreferencesOpen(false);
-          setIsPrivacyNoticeOpen(true);
-        }}
-      />
-
-      {/* Statutory NDPR & GDPR Data Subject Rights Modal */}
-      <PrivacyRightsModal
-        isOpen={isPrivacyNoticeOpen}
-        onClose={() => setIsPrivacyNoticeOpen(false)}
-        onOpenCookiePreferences={() => {
-          setIsPrivacyNoticeOpen(false);
-          setIsCookiePreferencesOpen(true);
-        }}
-      />
-
-      {/* Lightweight Concurrency Performance Monitor & SEO Meta Audit */}
-      <PerformanceSeoAudit />
-    </>
+        {isPrivacyNoticeOpen && (
+          <PrivacyRightsModal
+            isOpen={isPrivacyNoticeOpen}
+            onClose={() => setIsPrivacyNoticeOpen(false)}
+            onOpenCookiePreferences={() => {
+              setIsPrivacyNoticeOpen(false);
+              setIsCookiePreferencesOpen(true);
+            }}
+          />
+        )}
+      </Suspense>
+    </div>
   );
 }
 

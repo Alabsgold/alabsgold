@@ -1,7 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, ChevronRight, ShieldCheck, Zap, Sparkles } from 'lucide-react';
-import { HeroBrandVideoShowcase } from './HeroBrandVideoShowcase';
+import { ArrowRight, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface HeroProps {
   onOpenIntake: () => void;
@@ -9,153 +8,95 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ onOpenIntake }) => {
   return (
-    <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden bg-grid-pattern min-h-[85vh] flex items-center justify-center">
-      {/* Brand Video Loop & 3D Glass Shards Background Showcase */}
-      <HeroBrandVideoShowcase />
-
-      {/* Ambient animated warm gold backdrop lighting */}
-      <motion.div
-        animate={{
-          scale: [1, 1.12, 1],
-          opacity: [0.15, 0.22, 0.15],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[340px] bg-gradient-to-r from-amber-600/20 via-amber-500/15 to-amber-400/20 rounded-full blur-[140px] pointer-events-none"
-      />
-
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.1 },
-            },
-          }}
-          className="max-w-3xl mx-auto space-y-6"
-        >
-          {/* Minimal Sleek Status Pill */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: -10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-            }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181b]/90 border border-white/10 backdrop-blur-md text-[11px] font-mono text-zinc-300 shadow-sm"
-          >
+    <section className="relative py-20 sm:py-28 lg:py-36 bg-white/40 dark:bg-[#09090b]/40 backdrop-blur-md border-b border-white/20 dark:border-white/5 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-3xl">
+          
+          {/* OS 26 Liquid Glass Pill Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/60 dark:bg-white/10 backdrop-blur-xl border border-white/40 dark:border-white/15 text-xs font-semibold text-slate-800 dark:text-zinc-200 shadow-sm mb-6">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
             </span>
-            <span className="text-zinc-400">ALABSGOLD ·</span>
-            <span className="text-amber-400 font-semibold tracking-wider uppercase">Bespoke Engineering</span>
-            <span className="text-zinc-500 hidden sm:inline">| Lagos · Worldwide</span>
-          </motion.div>
+            <span className="text-amber-600 dark:text-amber-400 font-bold uppercase tracking-wider text-[11px]">ALABSGOLD</span>
+            <span aria-hidden="true" className="text-slate-300 dark:text-zinc-600">|</span>
+            <span>Boutique Web Engineering · Lagos, Nigeria</span>
+          </div>
 
-          {/* Direct, Bold Display Headline */}
-          <motion.h1
-            variants={{
-              hidden: { opacity: 0, y: 15 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
-            }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]"
-          >
-            Custom Web Platforms &{' '}
-            <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
-              Digital Infrastructure
+          {/* Exactly ONE H1 per page: crisp, authoritative, text-balanced */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.12] text-balance">
+            We engineer web platforms for businesses that need to win{' '}
+            <span className="bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 bg-clip-text text-transparent">
+              international trust.
             </span>
-          </motion.h1>
+          </h1>
 
-          {/* Simple, Direct 1-Sentence Description */}
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: 15 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
-            }}
-            className="text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed font-normal"
-          >
-            We engineer high-speed web platforms, scalable backends, and custom software for businesses serving international clients. Zero templates. Zero shortcuts. 100% bespoke code.
-          </motion.p>
+          {/* Business-first copy with transparent depth */}
+          <p className="mt-6 text-lg sm:text-xl text-slate-600 dark:text-zinc-300 leading-relaxed max-w-2xl font-normal">
+            When overseas buyers or corporate procurement teams evaluate your business online, they make a decision in seconds. ALABSGOLD builds fast, audit-ready web applications, export compliance systems, and secure backend architectures that turn diligence into signed contracts.
+          </p>
 
-          {/* Streamlined Call to Actions */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 15 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-            }}
-            className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5"
-          >
-            <motion.button
-              whileHover={{
-                scale: 1.02,
-                boxShadow: '0 0 30px rgba(245, 158, 11, 0.45)',
-              }}
-              whileTap={{ scale: 0.98 }}
+          {/* Liquid Glass Interactive Action Cluster */}
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+            <button
               onClick={onOpenIntake}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold text-black bg-gradient-to-r from-amber-400 to-amber-500 rounded-xl transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)] cursor-pointer active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-black bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-400 rounded-xl transition-all shadow-[0_4px_25px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_30px_rgba(245,158,11,0.5)] active:scale-95 cursor-pointer"
             >
-              <span>Start a Project</span>
+              <span>Request a Consultation</span>
               <ArrowRight className="w-4 h-4" />
-            </motion.button>
-
-            <motion.a
-              whileHover={{
-                scale: 1.02,
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-              }}
-              whileTap={{ scale: 0.98 }}
-              href="#flagship-work"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium text-zinc-300 hover:text-white bg-white/5 border border-white/10 hover:border-white/20 rounded-xl transition-all backdrop-blur-md"
+            </button>
+            
+            <Link
+              to="/services"
+              className="inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium text-slate-700 dark:text-zinc-200 hover:text-slate-900 dark:hover:text-white bg-white/50 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 border border-slate-300/80 dark:border-white/10 rounded-xl backdrop-blur-xl transition-all shadow-sm"
             >
-              <span>Explore Flagship Work</span>
-              <ChevronRight className="w-4 h-4 text-zinc-500" />
-            </motion.a>
-          </motion.div>
+              Explore Our Services
+            </Link>
 
-          {/* Minimalist 3-Point Liquid Glass Stat Strip */}
-          <motion.div
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { delay: 0.3, duration: 0.6 } },
-            }}
-            className="pt-6 sm:pt-8"
-          >
-            <div className="inline-grid grid-cols-3 gap-4 sm:gap-8 px-5 py-3 sm:px-8 sm:py-3.5 rounded-2xl bg-[#111114]/70 border border-white/10 backdrop-blur-xl shadow-xl">
-              <div className="text-center">
-                <div className="text-base sm:text-xl font-mono font-bold text-amber-400 tracking-tight">
-                  &lt; 1.0s
-                </div>
-                <div className="text-[10px] sm:text-[11px] font-mono text-zinc-400 tracking-wide uppercase">
-                  Sub-Second Speed
-                </div>
+            <a
+              href="https://wa.me/2347039960964?text=Hi%20Emmanuel,%20I%20am%20interested%20in%20a%20web%20engineering%20consultation%20with%20ALABSGOLD."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-4 py-3.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+            >
+              WhatsApp (+234 703 996 0964)
+            </a>
+          </div>
+
+          {/* OS 26 Liquid Glass Stat Strip: Translucent, showing the logo watermark through */}
+          <div className="mt-12 p-5 rounded-2xl bg-white/40 dark:bg-white/[0.04] backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.06)] grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs">
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 shrink-0">
+                <CheckCircle2 className="w-4 h-4" />
               </div>
-
-              <div className="text-center border-x border-white/10 px-2 sm:px-6">
-                <div className="text-base sm:text-xl font-mono font-bold text-white tracking-tight">
-                  100%
-                </div>
-                <div className="text-[10px] sm:text-[11px] font-mono text-zinc-400 tracking-wide uppercase">
-                  Client IP Ownership
-                </div>
-              </div>
-
-              <div className="text-center">
-                <div className="text-base sm:text-xl font-mono font-bold text-emerald-400 tracking-tight">
-                  0%
-                </div>
-                <div className="text-[10px] sm:text-[11px] font-mono text-zinc-400 tracking-wide uppercase">
-                  Zero Page Builders
-                </div>
+              <div>
+                <strong className="block text-slate-900 dark:text-white font-bold text-sm">100% Client IP Ownership</strong>
+                <span className="text-slate-500 dark:text-zinc-400">Zero templates · Full private code repository</span>
               </div>
             </div>
-          </motion.div>
 
-        </motion.div>
+            <div className="flex items-start gap-3 sm:border-x sm:border-slate-200/60 dark:sm:border-white/10 sm:px-4">
+              <div className="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 shrink-0">
+                <Zap className="w-4 h-4" />
+              </div>
+              <div>
+                <strong className="block text-slate-900 dark:text-white font-bold text-sm">Sub-Second Target Latency</strong>
+                <span className="text-slate-500 dark:text-zinc-400">Optimized for overseas buyers on mobile</span>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 shrink-0">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <div>
+                <strong className="block text-slate-900 dark:text-white font-bold text-sm">50/50 Milestone Contract</strong>
+                <span className="text-slate-500 dark:text-zinc-400">50% upfront · 50% only on approved QA</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );

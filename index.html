@@ -1,50 +1,114 @@
 <!doctype html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en" class="light scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="cfWyEX81FKb7vQiEdX6-EDsOjHTODw_4XQWPMeqC2O0" />
-    <title>ALABSGOLD — Boutique Web Engineering & Digital Infrastructure Studio</title>
-    <meta name="description" content="Boutique web engineering studio based in Lagos, Nigeria. We engineer trust-critical digital infrastructure, export compliance platforms, and high-concurrency systems for businesses operating across borders." />
-    <meta property="og:title" content="ALABSGOLD — Boutique Web Engineering & Digital Infrastructure Studio" />
-    <meta property="og:description" content="Boutique web engineering studio based in Lagos, Nigeria. We engineer trust-critical digital infrastructure, export compliance platforms, and high-concurrency systems for businesses operating across borders." />
+    <title>ALABSGOLD — Boutique Web Engineering Studio</title>
+    <meta name="description" content="Boutique web engineering studio in Lagos, Nigeria. We build high-speed web platforms, export compliance systems, and secure backend architectures for international enterprises." />
+    
+    <!-- Open Graph Metadata -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ALABSGOLD" />
+    <meta property="og:url" content="https://alabsgold.vercel.app" />
+    <meta property="og:title" content="ALABSGOLD — Boutique Web Engineering Studio" />
+    <meta property="og:description" content="Boutique web engineering studio in Lagos, Nigeria. We build high-speed web platforms, export compliance systems, and secure backend architectures for international enterprises." />
+    <meta property="og:image" content="https://alabsgold.vercel.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ALABSGOLD Boutique Web Engineering Studio in Lagos, Nigeria" />
+    
+    <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ALABSGOLD — Boutique Web Engineering & Digital Infrastructure Studio" />
-    <meta name="twitter:description" content="Boutique web engineering studio based in Lagos, Nigeria. We engineer trust-critical digital infrastructure, export compliance platforms, and high-concurrency systems for businesses operating across borders." />
-    <link rel="canonical" href="https://ais-dev-6sosvacuwxm3mhv5dhvb5r-98326757159.europe-west1.run.app" />
+    <meta name="twitter:title" content="ALABSGOLD — Boutique Web Engineering Studio" />
+    <meta name="twitter:description" content="Boutique web engineering studio in Lagos, Nigeria. We build high-speed web platforms, export compliance systems, and secure backend architectures for international enterprises." />
+    <meta name="twitter:image" content="https://alabsgold.vercel.app/og-image.png" />
+    <meta name="twitter:image:alt" content="ALABSGOLD Boutique Web Engineering Studio in Lagos, Nigeria" />
+    
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://alabsgold.vercel.app" />
+    
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       "name": "ALABSGOLD",
-      "alternateName": "ALABSGOLD Technology Studio",
-      "description": "Boutique web engineering studio based in Lagos, Nigeria. We engineer trust-critical digital infrastructure, export compliance platforms, and high-concurrency systems for businesses operating across borders.",
-      "url": "https://ais-dev-6sosvacuwxm3mhv5dhvb5r-98326757159.europe-west1.run.app",
-      "logo": "https://ais-dev-6sosvacuwxm3mhv5dhvb5r-98326757159.europe-west1.run.app/favicon.svg",
+      "alternateName": "ALABSGOLD Engineering Studio",
+      "description": "Boutique web engineering studio based in Lagos, Nigeria. We build high-speed web platforms, export compliance systems, and secure backend architectures for international enterprises.",
+      "url": "https://alabsgold.vercel.app",
+      "logo": "https://alabsgold.vercel.app/favicon.svg",
+      "image": "https://alabsgold.vercel.app/og-image.png",
+      "telephone": "+2347039960964",
+      "email": "alabsgold31@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Lagos",
         "addressCountry": "NG"
       },
-      "priceRange": "$$$$",
+      "areaServed": ["Nigeria", "United Kingdom", "United States", "Global"],
+      "founder": {
+        "@type": "Person",
+        "name": "Alabi Emmanuel",
+        "jobTitle": "Lead Systems Architect & Founder"
+      },
       "knowsAbout": [
         "Web Engineering",
-        "High-Concurrency Architecture",
-        "Export Compliance Infrastructure",
-        "Data Protection",
-        "Cloud Systems"
+        "Export Compliance Platforms",
+        "B2B Quotation Engines",
+        "High-Concurrency Backends",
+        "Data Protection"
       ]
     }
     </script>
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
+    
+    <!-- Lean Font Loading: Max 2 Families, 3 Weights Total (400, 600, 500) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- Prevent Theme Flash Script -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('alabsgold_theme');
+          if (saved === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.add('light');
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body class="bg-[#09090b] text-[#f4f4f5] antialiased selection:bg-[#f59e0b]/25 selection:text-[#fbbf24]">
-    <div id="root"></div>
+  <body class="bg-white text-slate-900 dark:bg-[#09090b] dark:text-zinc-100 font-sans antialiased transition-colors duration-150 selection:bg-amber-500/20 selection:text-amber-800 dark:selection:text-amber-300">
+    <div id="root">
+      <!-- Static Pre-render Shell for Immediate First Paint on Slow Connections -->
+      <div id="ssr-pre-shell" class="min-h-screen flex flex-col justify-between p-6 max-w-6xl mx-auto">
+        <header class="flex items-center justify-between py-4 border-b border-slate-200 dark:border-zinc-800">
+          <div class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">ALABSGOLD</div>
+          <div class="text-sm font-medium text-amber-600 dark:text-amber-400">Engineering Studio · Lagos</div>
+        </header>
+        <main class="py-20 max-w-3xl">
+          <p class="text-xs uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold mb-3">Boutique Web Engineering · Lagos, Nigeria</p>
+          <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+            High-speed web platforms for enterprises that need to convert global scrutiny into trust.
+          </h1>
+          <p class="mt-6 text-lg text-slate-600 dark:text-zinc-400 leading-relaxed">
+            We engineer bespoke web applications, export compliance systems, and secure backend architectures for businesses serving international clients. Zero templates. 100% intellectual property ownership.
+          </p>
+        </main>
+        <footer class="py-6 border-t border-slate-200 dark:border-zinc-800 text-xs text-slate-500 dark:text-zinc-500">
+          ALABSGOLD · Lagos, Nigeria · alabsgold31@gmail.com · +234 703 996 0964
+        </footer>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

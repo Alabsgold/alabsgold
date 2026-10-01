@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Shield, Menu, X, ArrowUpRight, Terminal, Activity, Zap } from 'lucide-react';
-import { AlabsgoldLogo } from './AlabsgoldLogo';
+import { Menu, X, Sun, Moon, ArrowUpRight } from 'lucide-react';
 
 interface NavbarProps {
   onOpenIntake: () => void;
-  onOpenQuickReach?: () => void;
-  onReplayPreloader?: () => void;
+  theme: 'light' | 'dark';
+  onToggleTheme: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenIntake,
-  onOpenQuickReach,
-  onReplayPreloader,
+  theme,
+  onToggleTheme,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,55 +19,62 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Scroll to top on page navigation
+  // Close mobile drawer when route changes
   useEffect(() => {
-    window.scrollTo(0, 0);
+    setMobileMenuOpen(false);
   }, [location.pathname]);
 
   const navLinks = [
     { label: 'Home', path: '/' },
     { label: 'Services', path: '/services' },
-    { label: 'Products', path: '/products' },
+    { label: 'Work & Labs', path: '/products' },
     { label: 'Founder', path: '/founder' },
     { label: 'About Us', path: '/about' },
-    { label: 'Contact Us', path: '/contact' },
+    { label: 'Contact', path: '/contact' },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#09090b]/90 backdrop-blur-md border-b border-[#27272a] shadow-lg shadow-black/50 py-3'
-          : 'bg-[#09090b]/75 backdrop-blur-sm border-b border-[#27272a]/50 py-4'
+          ? 'bg-white/65 dark:bg-[#09090b]/65 backdrop-blur-xl border-b border-white/30 dark:border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.06)] py-3'
+          : 'bg-white/45 dark:bg-[#09090b]/45 backdrop-blur-lg border-b border-white/20 dark:border-white/5 py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand Logo */}
+          
+          {/* Zone 1: Wordmark with subtle glass hover */}
           <Link
             to="/"
-            className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg p-1"
+            className="flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg p-1"
           >
-            <AlabsgoldLogo variant="full" size="md" withStatus={true} />
+            <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors">
+              ALABSGOLD
+            </span>
+            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold tracking-wider uppercase bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 backdrop-blur-md">
+              Studio
+            </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          {/* Zone 2: Dedicated Page NavLinks with OS 26 Liquid Glass Active State */}
+          <nav className="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-slate-200/40 dark:bg-white/[0.04] backdrop-blur-md border border-white/40 dark:border-white/10 shadow-inner">
             {navLinks.map((link) => (
               <NavLink
-                key={link.label}
+                key={link.path}
                 to={link.path}
+                end={link.path === '/'}
                 className={({ isActive }) =>
-                  `text-xs lg:text-sm font-medium px-3 py-1.5 rounded-lg transition-all ${
+                  `px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                     isActive
-                      ? 'text-amber-400 bg-amber-500/10 border border-amber-500/20 font-semibold'
-                      : 'text-zinc-300 hover:text-white hover:bg-zinc-800/40'
+                      ? 'bg-white/90 dark:bg-white/15 text-slate-900 dark:text-white font-semibold shadow-sm border border-black/5 dark:border-white/20 backdrop-blur-lg'
+                      : 'text-slate-600 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/40 dark:hover:bg-white/5'
                   }`
                 }
               >
@@ -77,82 +83,56 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </nav>
 
-          {/* Action CTAs */}
-          <div className="hidden lg:flex items-center gap-3">
-            {onReplayPreloader && (
-              <button
-                onClick={onReplayPreloader}
-                className="px-2.5 py-1.5 rounded-lg bg-[#18181b] border border-[#27272a] hover:border-amber-500/40 text-[11px] font-mono text-zinc-400 hover:text-amber-400 transition-colors cursor-pointer"
-                title="Replay Studio Preloader"
-              >
-                Replay Intro
-              </button>
-            )}
+          {/* Zone 3: Controls (Theme Toggle + Liquid Glass CTA) */}
+          <div className="flex items-center gap-2.5">
+            {/* Theme Toggle Button */}
+            <button
+              onClick={onToggleTheme}
+              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="p-2 rounded-full border border-slate-200/80 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-md text-slate-700 dark:text-zinc-200 hover:bg-white/80 dark:hover:bg-white/10 transition-colors shadow-sm cursor-pointer"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-700" />
+              )}
+            </button>
 
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#18181b] border border-[#27272a] text-xs font-mono text-zinc-300">
-              <Activity className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-              <span>SLA: 99.995%</span>
-            </div>
-
-            {onOpenQuickReach && (
-              <button
-                onClick={onOpenQuickReach}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#18181b] border border-[#27272a] hover:border-amber-500/40 text-xs font-mono text-zinc-300 hover:text-amber-400 transition-colors cursor-pointer"
-                title="Quick Question or Client Review"
-              >
-                <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span>Quick Reach</span>
-              </button>
-            )}
-
+            {/* Desktop Primary CTA with Liquid Glass Glow */}
             <button
               onClick={onOpenIntake}
-              className="relative inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-black bg-gradient-to-r from-amber-400 to-amber-500 rounded-lg hover:from-amber-300 hover:to-amber-400 transition-all shadow-[0_0_15px_rgba(245,158,11,0.25)] hover:shadow-[0_0_20px_rgba(245,158,11,0.4)] active:scale-95 cursor-pointer font-semibold"
+              className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-black bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:to-amber-400 rounded-full transition-all shadow-[0_2px_15px_rgba(245,158,11,0.3)] hover:shadow-[0_4px_20px_rgba(245,158,11,0.5)] active:scale-95 cursor-pointer whitespace-nowrap"
             >
-              <span>Initiate Intake</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <span>Request Consultation</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
-          </div>
 
-          {/* Mobile menu toggle */}
-          <div className="flex md:hidden items-center gap-2">
-            <button
-              onClick={onOpenIntake}
-              className="px-3 py-1.5 text-xs font-semibold text-black bg-amber-400 rounded-md hover:bg-amber-300"
-            >
-              Intake
-            </button>
+            {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg bg-[#18181b] border border-[#27272a] text-zinc-300 hover:text-white focus:outline-none"
-              aria-label="Toggle Navigation Menu"
+              className="md:hidden p-2 rounded-full border border-slate-200/80 dark:border-white/10 bg-white/50 dark:bg-white/5 backdrop-blur-md text-slate-800 dark:text-zinc-200 hover:bg-white/80 dark:hover:bg-white/10 transition-colors cursor-pointer"
+              aria-label="Toggle navigation drawer"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-3 p-4 rounded-xl bg-[#111114] border border-[#27272a] shadow-xl space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="flex items-center justify-between pb-2 border-b border-zinc-800 text-xs text-zinc-400 font-mono">
-              <span className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                Q2/Q3 Ingestion Open
-              </span>
-              <span>SLA: 99.995%</span>
-            </div>
+          <div className="md:hidden mt-3 p-4 rounded-2xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-2xl border border-white/40 dark:border-white/10 shadow-2xl space-y-3 animate-in fade-in slide-in-from-top-2 duration-200">
             <div className="flex flex-col gap-1.5">
               {navLinks.map((link) => (
                 <NavLink
-                  key={link.label}
+                  key={link.path}
                   to={link.path}
+                  end={link.path === '/'}
                   onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
-                    `px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    `px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
                       isActive
-                        ? 'text-amber-400 bg-amber-500/15 border border-amber-500/30'
-                        : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                        ? 'bg-amber-500/15 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/25'
+                        : 'text-slate-700 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-white/5'
                     }`
                   }
                 >
@@ -160,32 +140,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </NavLink>
               ))}
             </div>
-            <div className="pt-2 border-t border-zinc-800 space-y-2">
+
+            <div className="pt-2 border-t border-slate-200/80 dark:border-zinc-800">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenIntake();
                 }}
-                className="w-full py-2.5 px-4 text-center text-sm font-semibold text-black bg-gradient-to-r from-amber-400 to-amber-500 rounded-lg shadow-md"
+                className="w-full py-2.5 px-4 text-center text-xs font-semibold uppercase tracking-wider text-black bg-gradient-to-r from-amber-400 to-amber-500 rounded-xl shadow-md cursor-pointer"
               >
-                Schedule Architecture Review
+                Request a Consultation
               </button>
-
-              {onOpenQuickReach && (
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenQuickReach();
-                  }}
-                  className="w-full py-2 px-3 text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 rounded-lg flex items-center justify-center gap-1.5 cursor-pointer"
-                >
-                  <Zap className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Quick Reach & Client Review</span>
-                </button>
-              )}
             </div>
           </div>
         )}
+
       </div>
     </header>
   );
