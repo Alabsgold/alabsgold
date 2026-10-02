@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { GlobalLogoWallpaper } from './components/GlobalLogoWallpaper';
@@ -24,17 +25,55 @@ const PrivacyRightsModal = lazy(() => import('./components/PrivacyRightsModal').
 function ScrollToTopOnRoute() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [pathname]);
   return null;
 }
 
-// Minimal fallback loader
+// Minimal fallback loader with subtle liquid glass spinner
 function RouteLoader() {
   return (
     <div className="min-h-[50vh] flex items-center justify-center">
-      <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+      <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
     </div>
+  );
+}
+
+// Animated Multi-Page Routes with Framer Motion subtle fade-in & slide transitions
+function AnimatedRoutes({ onOpenIntake }: { onOpenIntake: (serviceTitle?: string) => void }) {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+        }}
+        exit={{
+          opacity: 0,
+          y: -12,
+          filter: 'blur(2px)',
+          transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] },
+        }}
+        className="w-full"
+      >
+        <Routes location={location}>
+          <Route path="/" element={<HomePage onOpenIntake={onOpenIntake} />} />
+          <Route path="/services" element={<ServicesPage onOpenIntake={onOpenIntake} />} />
+          <Route path="/products" element={<ProductsPage onOpenIntake={onOpenIntake} />} />
+          <Route path="/founder" element={<FounderPage onOpenIntake={onOpenIntake} />} />
+          <Route path="/about" element={<AboutPage onOpenIntake={onOpenIntake} />} />
+          <Route path="/contact" element={<ContactPage />} />
+          {/* Catch-all fallback */}
+          <Route path="*" element={<HomePage onOpenIntake={onOpenIntake} />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
@@ -90,7 +129,7 @@ function MainLayout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900 dark:bg-[#09090b] dark:text-zinc-100 transition-colors duration-150 relative">
+    <div className="min-h-screen flex flex-col bg-slate-50/70 text-slate-900 dark:bg-[#07070a]/75 dark:text-zinc-100 transition-colors duration-150 relative">
       <ScrollToTopOnRoute />
 
       {/* Fixed Architectural Vector Logo Wallpaper: Translucent with OS 26 ambient aura */}
@@ -106,20 +145,11 @@ function MainLayout() {
       {/* Multi-Page Route Viewport with Translucent Liquid Glass Content Layers */}
       <main className="flex-grow relative z-10">
         <Suspense fallback={<RouteLoader />}>
-          <Routes>
-            <Route path="/" element={<HomePage onOpenIntake={handleOpenIntake} />} />
-            <Route path="/services" element={<ServicesPage onOpenIntake={handleOpenIntake} />} />
-            <Route path="/products" element={<ProductsPage onOpenIntake={handleOpenIntake} />} />
-            <Route path="/founder" element={<FounderPage onOpenIntake={handleOpenIntake} />} />
-            <Route path="/about" element={<AboutPage onOpenIntake={handleOpenIntake} />} />
-            <Route path="/contact" element={<ContactPage />} />
-            {/* Catch-all fallback */}
-            <Route path="*" element={<HomePage onOpenIntake={handleOpenIntake} />} />
-          </Routes>
+          <AnimatedRoutes onOpenIntake={handleOpenIntake} />
         </Suspense>
       </main>
 
-      {/* Footer */}
+      {/* Footer with Dedicated Page Links */}
       <div className="relative z-10">
         <Footer
           onOpenIntake={() => handleOpenIntake()}

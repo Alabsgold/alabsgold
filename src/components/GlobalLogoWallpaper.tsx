@@ -1,13 +1,14 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 /**
  * GlobalLogoWallpaper:
  * Renders an architectural, floating vector watermark of the ALABSGOLD
  * brand emblem and monogram centered across every page as a fixed background wallpaper.
  *
- * Integrated with OS 26 ambient motion graphics and calibrated transparency
+ * Integrated with OS 26 motion graphics, ambient fluid auras, and calibrated transparency
  * so that when the user scrolls through frosted liquid-glass panels, the iconic
- * gold emblem shines through with parallax-like depth.
+ * gold emblem shines through with visible depth and parallax aesthetic.
  */
 export const GlobalLogoWallpaper: React.FC = () => {
   return (
@@ -16,19 +17,62 @@ export const GlobalLogoWallpaper: React.FC = () => {
       className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden select-none"
     >
       {/* Dynamic ambient fluid aura with slow breathing animation */}
-      <div className="absolute w-[500px] h-[500px] sm:w-[800px] sm:h-[800px] rounded-full bg-gradient-to-tr from-amber-500/10 via-amber-400/5 to-transparent blur-[120px] animate-pulse duration-[6000ms]" />
-      
-      {/* Secondary atmospheric glass refraction orb */}
-      <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-500/5 blur-[100px] pointer-events-none" />
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-amber-600/5 blur-[100px] pointer-events-none" />
+      <motion.div
+        animate={{
+          scale: [1, 1.12, 1],
+          opacity: [0.35, 0.55, 0.35],
+          rotate: [0, 45, 0],
+        }}
+        transition={{
+          duration: 14,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="absolute w-[500px] h-[500px] sm:w-[850px] sm:h-[850px] rounded-full bg-gradient-to-tr from-amber-500/15 via-amber-400/10 to-transparent blur-[120px]"
+      />
+
+      {/* Secondary atmospheric glass refraction orbs */}
+      <motion.div
+        animate={{
+          x: [0, 20, 0],
+          y: [0, -25, 0],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-amber-500/10 blur-[100px] pointer-events-none"
+      />
+      <motion.div
+        animate={{
+          x: [0, -20, 0],
+          y: [0, 25, 0],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-amber-600/10 blur-[100px] pointer-events-none"
+      />
 
       {/* Centerpiece Vector Monogram & Wordmark Watermark */}
-      <div className="relative flex flex-col items-center justify-center opacity-10 dark:opacity-15 transition-opacity duration-700 scale-95 sm:scale-110 lg:scale-125">
-        
+      <motion.div
+        animate={{
+          y: [-8, 8, -8],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="relative flex flex-col items-center justify-center opacity-20 dark:opacity-28 transition-opacity duration-700 scale-95 sm:scale-110 lg:scale-125"
+      >
         {/* Large Precision Vector "A" Monogram with Angular Golden Slash */}
         <svg
           viewBox="0 0 200 200"
-          className="w-80 h-80 sm:w-[420px] sm:h-[420px] drop-shadow-[0_0_50px_rgba(245,158,11,0.35)]"
+          className="w-80 h-80 sm:w-[420px] sm:h-[420px] drop-shadow-[0_0_60px_rgba(245,158,11,0.45)]"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -45,7 +89,7 @@ export const GlobalLogoWallpaper: React.FC = () => {
               <stop offset="100%" stopColor="#94a3b8" />
             </linearGradient>
             <radialGradient id="wall-glow-core" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.45" />
               <stop offset="100%" stopColor="#d97706" stopOpacity="0" />
             </radialGradient>
           </defs>
@@ -91,7 +135,7 @@ export const GlobalLogoWallpaper: React.FC = () => {
         <div className="mt-2 text-[10px] sm:text-xs font-mono tracking-[0.7em] text-amber-600 dark:text-amber-300 uppercase font-bold">
           BOUTIQUE WEB ENGINEERING · LAGOS
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

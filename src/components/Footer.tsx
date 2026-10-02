@@ -1,5 +1,6 @@
 import React from 'react';
-import { Mail, Phone, MessageSquare, ArrowUp, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Mail, Phone, MessageSquare, ArrowUp, Globe, ArrowRight } from 'lucide-react';
 import { STUDIO_DATA } from '../data/content';
 
 interface FooterProps {
@@ -18,15 +19,15 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-slate-100 dark:bg-[#070709] border-t border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 text-sm transition-colors">
+    <footer className="bg-slate-100/70 dark:bg-[#070709]/70 backdrop-blur-xl border-t border-white/50 dark:border-white/10 text-slate-600 dark:text-zinc-400 text-sm transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           
           {/* Studio Brand & Purpose */}
           <div className="lg:col-span-5 space-y-4">
-            <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+            <Link to="/" className="inline-block text-xl font-bold tracking-tight text-slate-900 dark:text-white hover:text-amber-500 transition-colors">
               ALABSGOLD
-            </span>
+            </Link>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 max-w-sm leading-relaxed font-normal">
               A boutique web engineering studio based in Lagos, Nigeria. We engineer trust-critical digital platforms, export quotation systems, and resilient backends for businesses serving international clients.
             </p>
@@ -50,36 +51,47 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
-          {/* Quick Navigation Links */}
+          {/* Quick Navigation Dedicated Page Links */}
           <div className="lg:col-span-3 space-y-3">
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-white">
-              Navigation
+              Dedicated Pages
             </div>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2.5 text-xs">
               <li>
-                <a href="/#services" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Services & Capabilities
-                </a>
+                <Link to="/" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 group-hover:bg-amber-500" />
+                  <span>Home</span>
+                </Link>
               </li>
               <li>
-                <a href="/#work" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Selected Work & Case Studies
-                </a>
+                <Link to="/services" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 group-hover:bg-amber-500" />
+                  <span>Services & Milestone Pricing</span>
+                </Link>
               </li>
               <li>
-                <a href="/#process" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-                  How We Work
-                </a>
+                <Link to="/products" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 group-hover:bg-amber-500" />
+                  <span>Work, Platforms & Technical Labs</span>
+                </Link>
               </li>
               <li>
-                <a href="/#why-us" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Why ALABSGOLD (Trust)
-                </a>
+                <Link to="/founder" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 group-hover:bg-amber-500" />
+                  <span>Founder Profile & Achievements</span>
+                </Link>
               </li>
               <li>
-                <a href="/#contact" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-                  Contact & Consultation
-                </a>
+                <Link to="/about" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 group-hover:bg-amber-500" />
+                  <span>About Us & Engineering Philosophy</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors flex items-center gap-1.5 group">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500/50 group-hover:bg-amber-500" />
+                  <span>Contact & Project Intake Desk</span>
+                </Link>
               </li>
             </ul>
           </div>
@@ -95,7 +107,7 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="space-y-2">
               <button
                 onClick={onOpenIntake}
-                className="w-full py-2.5 px-4 rounded-lg bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs uppercase tracking-wider transition-colors text-center cursor-pointer shadow-sm"
+                className="w-full py-2.5 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs uppercase tracking-wider transition-colors text-center cursor-pointer shadow-sm active:scale-95"
               >
                 Request a Consultation
               </button>
@@ -103,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({
                 href={STUDIO_DATA.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 px-3 text-xs rounded-lg border border-slate-300 dark:border-zinc-700 hover:border-slate-400 dark:hover:border-zinc-500 text-slate-700 dark:text-zinc-200 flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2 px-3 text-xs rounded-xl border border-slate-300/80 dark:border-white/10 hover:border-slate-400 dark:hover:border-white/20 bg-white/40 dark:bg-white/5 text-slate-700 dark:text-zinc-200 flex items-center justify-center gap-2 transition-colors"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>WhatsApp: {STUDIO_DATA.phone}</span>
@@ -114,15 +126,15 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Bottom Bar: Copyright & Accessibility Links */}
-        <div className="mt-12 pt-6 border-t border-slate-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-zinc-500 font-mono">
+        <div className="mt-12 pt-6 border-t border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-zinc-500 font-mono">
           <div>
             © {new Date().getFullYear()} ALABSGOLD. All rights reserved. Lagos, Nigeria.
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             {onOpenPrivacyNotice && (
               <button
                 onClick={onOpenPrivacyNotice}
-                className="hover:text-slate-900 dark:hover:text-zinc-300 transition-colors cursor-pointer"
+                className="hover:text-slate-800 dark:hover:text-zinc-200 cursor-pointer"
               >
                 Privacy Notice
               </button>
@@ -130,16 +142,16 @@ export const Footer: React.FC<FooterProps> = ({
             {onOpenCookiePreferences && (
               <button
                 onClick={onOpenCookiePreferences}
-                className="hover:text-slate-900 dark:hover:text-zinc-300 transition-colors cursor-pointer"
+                className="hover:text-slate-800 dark:hover:text-zinc-200 cursor-pointer"
               >
-                Cookie Settings
+                Cookie Preferences
               </button>
             )}
             <button
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1 hover:text-slate-900 dark:hover:text-zinc-300 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg border border-slate-200 dark:border-zinc-800 hover:bg-slate-200/50 dark:hover:bg-zinc-800/50 transition-colors cursor-pointer"
+              aria-label="Scroll to top of page"
             >
-              <span>Back to Top</span>
               <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>
