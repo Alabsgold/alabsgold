@@ -6,7 +6,7 @@
 **Backend-focused software engineer · Python & TypeScript · APIs, automation & system architecture**
 
 [![Studio Website](https://img.shields.io/badge/ALABSGOLD-Studio_Website-d4a017?style=for-the-badge&logo=vercel&logoColor=white)](https://alabsgold.vercel.app)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-111111?style=for-the-badge&logo=googlechrome&logoColor=white)](https://porfolio-remake-x.vercel.app)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-111111?style=for-the-badge&logo=googlechrome&logoColor=white)](https://emmanuel-alabi-portfolio.vercel.app)
 [![Work Email](https://img.shields.io/badge/Work-femi.alabi@alabsgold.site-ea4335?style=for-the-badge&logo=maildotru&logoColor=white)](mailto:femi.alabi@alabsgold.site)
 [![Gmail](https://img.shields.io/badge/Gmail-emmaalabi31@gmail.com-ea4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:emmaalabi31@gmail.com)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-Start_a_project-25d366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/2347039960964?text=Hi%20Emmanuel,%20I%20saw%20your%20GitHub%20and%20I'd%20like%20to%20discuss%20a%20project.)
@@ -114,6 +114,7 @@
 
 Need a platform that wins over international buyers, a payment flow that verifies itself, or a backend that holds up under load?
 
+- 🌐 **Portfolio & blog:** [emmanuel-alabi-portfolio.vercel.app](https://emmanuel-alabi-portfolio.vercel.app)
 - 🏛️ **Studio:** [alabsgold.vercel.app](https://alabsgold.vercel.app)
 - ✉️ **Work email:** [femi.alabi@alabsgold.site](mailto:femi.alabi@alabsgold.site)
 - 📧 **Personal:** [emmaalabi31@gmail.com](mailto:emmaalabi31@gmail.com)
