@@ -1,161 +1,123 @@
-# ALABSGOLD — Boutique Web Engineering & Digital Infrastructure Studio
+<div align="center">
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.5+-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-18.3+-61dafb?logo=react&logoColor=black)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.0+-646cff?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0+-06b6d4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.0+-ff0055?logo=framer&logoColor=white)](https://www.framer.com/motion/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg)](LICENSE)
+# Hi, I'm Emmanuel Alabi 👋
 
-> **"We engineer digital infrastructure for businesses whose next customer is on another continent, doesn't know them yet, and is deciding—in the first 30 seconds on the site—whether to trust them with money."**
+### Founder & Lead Systems Engineer at **[ALABSGOLD](https://alabsgold.vercel.app)**
+**Backend-focused software engineer · Python & TypeScript · APIs, automation & system architecture**
+
+[![Studio Website](https://img.shields.io/badge/ALABSGOLD-Studio_Website-d4a017?style=for-the-badge&logo=vercel&logoColor=white)](https://alabsgold.vercel.app)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-111111?style=for-the-badge&logo=googlechrome&logoColor=white)](https://porfolio-remake-x.vercel.app)
+[![Work Email](https://img.shields.io/badge/Work-femi.alabi@alabsgold.site-ea4335?style=for-the-badge&logo=maildotru&logoColor=white)](mailto:femi.alabi@alabsgold.site)
+[![Gmail](https://img.shields.io/badge/Gmail-emmaalabi31@gmail.com-ea4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:emmaalabi31@gmail.com)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-Start_a_project-25d366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/2347039960964?text=Hi%20Emmanuel,%20I%20saw%20your%20GitHub%20and%20I'd%20like%20to%20discuss%20a%20project.)
+
+📍 Lagos, Nigeria (WAT / GMT+1) · Working with clients worldwide
+
+</div>
 
 ---
 
 ## 🏛️ About ALABSGOLD
 
-Headquartered in Lagos, Nigeria (WAT / GMT+1) and operating globally, **ALABSGOLD** is an engineering studio founded by **Alabi Emmanuel (Alabsgold)**. The studio designs, fortifies, and ships production-grade web platforms, custom quotation systems, AI retrieval engines, and high-concurrency backends for exporters, luxury real estate operators, and diaspora businesses.
+**ALABSGOLD** is a boutique web engineering and digital infrastructure studio I founded. We design, harden and ship production-grade web platforms, quotation and payment systems, AI retrieval engines and high-concurrency backends. Our clients are exporters, real-estate operators and diaspora businesses.
 
-### The Problem We Solve: The Structural Credibility Gap
-African businesses serving foreign buyers face a structural credibility gap that has nothing to do with product quality. A premium cashew or ginger exporter with international phytosanitary certificates can lose a six-figure contract because of a sluggish page-builder site, broken quotation flows, or an unbranded email address. 
+> *"We engineer digital infrastructure for businesses whose next customer is on another continent, doesn't know them yet, and is deciding, in the first 30 seconds on the site, whether to trust them with money."*
 
-ALABSGOLD closes this gap with high-performance engineering: verified compliance showcases, instant page responsiveness, transparent milestone pricing, and hand-rolled Studio backoffices.
+**The problem we solve:** African businesses selling to foreign buyers face a credibility gap that has nothing to do with product quality. A slow page-builder site, a broken quotation flow or an unbranded email can cost a serious exporter a six-figure contract. ALABSGOLD closes that gap with fast, secure, hand-built software.
 
----
-
-## ⚡ Core Architectural Invariants
-
-* **Zero Page-Builders or Disposable Templates:** No WordPress, Elementor, or bloated CMS plugins. Every platform is hand-crafted in type-safe React, Next.js, and Python.
-* **Performance as a Conversion Metric:** Optimized for sub-second mobile rendering across international latency profiles.
-* **Uncompromising Ownership:** Clients receive 100% intellectual property ownership, clear documentation, and private Git repository transfer upon milestone completion.
-* **Security from First Commit:** Webhook HMAC authentication, rate limiting, and parameter validation guards built into the core architecture.
-* **Lean, Self-Managed VPS Hosting:** Configured on Ubuntu VPS with Nginx reverse proxying, systemd/PM2 process supervision, and automated backup routines—eliminating recurring third-party platform fees.
+**How we work**
+- 🧱 **No page builders.** Every platform is hand-crafted in type-safe React/Next.js and Python.
+- ⚡ **Performance is a conversion metric.** We build for sub-second mobile loads across international networks.
+- 🔐 **Secure from the first commit.** HMAC-verified webhooks, rate limiting and strict input validation.
+- 📦 **You own it.** Full IP, documentation and the private repo are handed over at each milestone.
+- 🖥️ **Lean hosting.** Ubuntu VPS, Nginx, PM2/systemd and automated backups, with no lock-in platform fees.
 
 ---
 
-## 🗺️ Multi-Page Application Architecture
+## 🚀 Featured Work
 
-| Route | Page | Description |
+| Project | What it does | Stack |
 | :--- | :--- | :--- |
-| `/` | **Home** | Comprehensive studio overview, interactive Architecture Simulator, featured case studies (*Kadie Fresh*, *NIRA-XT Guardian 2*, *Atlassian Forge Apps*), process overview, and client testimonials. |
-| `/services` | **Services & Pricing** | Three core engineering pillars, authentic milestone pricing tiers with an interactive **NGN / International** currency toggle, niche industry solution bands, and "What We Don't Do" rules. |
-| `/products` | **Products & Labs** | Categorized portfolio featuring live production platforms, brand identity systems, and R&D lab experiments (*PrepAI*, *PrepCBT*, *EX-DIGITAL*, *Project Aegis*). |
-| `/founder` | **Founder Profile** | Profile of Founder & Lead Systems Engineer **Alabi Emmanuel**, 1st place NiRA-XT Hackathon award, Alluvium enterprise SIWES experience, and verified certifications. |
-| `/about` | **About Studio** | Mission statement, the structural credibility gap analysis, 4 studio quality pillars, global operating corridors, and regulatory compliance standards. |
-| `/contact` | **Contact & Intake** | Authentic project intake scoping form, guaranteed 24-hour response SLA (Mon–Sat), direct WhatsApp link (`+234 703 996 0964`), and Radix UI Accordion FAQs. |
+| **[DPT Pay System](https://github.com/Alabsgold/DPT-pay-system)** · [live](https://dpt-pay-system.vercel.app) | Departmental dues & payments platform. Students pay through Paystack with automatic verification, replacing "send a screenshot as proof". 333 backend tests, CI on every push. *NACOS National Build Challenge.* | Django · DRF · React · Paystack |
+| **[EX-AMS](https://github.com/Alabsgold/ex_digital_2)** | Real-time university attendance system with barcode/QR scanning, live attendance streaming and role-based access. *NACOS 2025/26 Hackathon, Team EX-Coders.* | FastAPI · PostgreSQL · Redis · SSE · Docker |
+| **[NIRA-XT Guardian 2](https://github.com/Alabsgold/NIRA-XT_Guardian_2)** · [live](https://nira-xt-guardian-2.vercel.app) | DNS-level threat protection and parental control. Uses Gemini AI to score unknown domains in real time against zero-day phishing and malware. | TypeScript · Gemini AI · DNS |
+| **[X-DNS Guardian+](https://github.com/Alabsgold/X-DNS-GUARDIAN)** | Real-time DNS metadata scanner and 0–100 risk scorer for the `.ng` namespace. Flags fast-flux TTLs, phishing keywords and missing SSL. | TypeScript · DNS · RDAP/WHOIS |
+| **[Hand Tracker X](https://github.com/Alabsgold/hand_tracker_x)** · [live](https://handtrackerx.vercel.app) | In-browser 3D hand tracking rendered as a neon hologram, with gesture recognition and a filtered kinematics engine. Video never leaves the device. | React · MediaPipe · Three.js |
+| **[Freshvena Glow](https://github.com/Alabsgold/freshvena_web)** | Digital storefront for a Nigerian premium food exporter serving buyers in the USA, UK, Canada and Europe. | React · TypeScript · Tailwind · shadcn/ui |
+| **[LetLearn_Py Academy](https://github.com/Alabsgold/LetLearn_Py-Academy)** · [live](https://let-learn-py-academy.vercel.app) | Python learning hub with lessons and live in-browser tests. | TypeScript |
+| **[Confluence Knowledge Freshness Agent](https://github.com/Alabsgold/Confluence-Knowledge-Freshness-Agent)** | Atlassian Forge app that keeps Confluence documentation from going stale. Built during my SIWES at Alluvium. | Atlassian Forge · JavaScript |
+
+**🧪 R&D lab:** [PrepAI](https://github.com/Alabsgold/PrepAI) (AI exam & interview prep) · [PrepCBT](https://github.com/Alabsgold/PrepCBT) (JAMB/WAEC/Post-UTME CBT practice) · [UNI-Pulse](https://github.com/Alabsgold/UNI-Pulse) (Android schedule tracker for students) · [Planetary Simulation](https://planetary-simulation-six.vercel.app) · [Gesture Rhythm](https://github.com/Alabsgold/Gesture-rhythm)
 
 ---
 
-## 🔍 SEO & Social Sharing Engine (`useSEO` Hook)
+## 🏆 Highlights
 
-The application features a custom React hook (`src/hooks/useSEO.ts`) that dynamically configures search engine metadata, Open Graph cards, Twitter cards, canonical tags, and Schema.org JSON-LD on every page transition:
-
-* **Dynamic Titles & Descriptions:** Tailored per-route for high search click-through rates.
-* **Rich Social Cards:** Open Graph (`og:title`, `og:description`, `og:url`, `og:site_name`) and Twitter Card (`summary_large_image`) tags for Slack, Discord, LinkedIn, X, and WhatsApp link previews.
-* **Canonical URL Resolution:** Automatically keeps canonical links in sync with client-side history navigation.
-* **Schema.org Structured Data:** Dynamic JSON-LD schema injection supporting `ProfessionalService`, `Service`, `CollectionPage`, `Person`, `AboutPage`, and `ContactPage` schemas.
-
----
-
-## 🛠️ Technology Stack
-
-* **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict compiler flags)
-* **Frontend Framework:** [React 18](https://react.dev/) + [Vite](https://vitejs.dev/)
-* **Routing:** [React Router DOM v6](https://reactrouter.com/)
-* **Styling & Layout:** [Tailwind CSS v4](https://tailwindcss.com/)
-* **Motion & Interactions:** [Framer Motion](https://www.framer.com/motion/) (Scroll progress indicator, staggered reveals, smooth tab transitions)
-* **Headless UI Primitives:** [@radix-ui/react-dialog](https://www.radix-ui.com/)
-* **Iconography:** [Lucide React](https://lucide.dev/)
+- 🥇 **1st place, NiRA-XT Hackathon.** DNS security and trust for the Nigerian internet.
+- 🧑‍💻 **NACOS 2025/2026 Hackathon** (Team EX-Coders) and **NACOS National Build Challenge** (Team Visionary Coders).
+- 🏢 **SIWES at Alluvium** (Jul–Sep 2026). Built enterprise Atlassian Forge apps for Confluence.
+- 🏛️ **Founded ALABSGOLD**, now shipping production systems for real clients.
+- 🎓 **B.Sc. Computer Science** (300 level), Joseph Ayo Babalola University (JABU).
+- 🎥 **Head, Teenagers' Media Department** at my church, plus **technical lead** on hackathon teams.
 
 ---
 
-## 🚀 Getting Started
+## 🛠️ Tech Stack
 
-### Prerequisites
-* Node.js `18.x` or higher
-* npm `9.x` or higher
+**Languages**
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![C#](https://img.shields.io/badge/C%23-512BD4?style=flat-square&logo=dotnet&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/alabsgold/alabsgold-studio.git
-cd alabsgold-studio
-```
+**Backend**
+![Django](https://img.shields.io/badge/Django-092E20?style=flat-square&logo=django&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
 
-### 2. Install Dependencies
-```bash
-npm install
-```
+**Frontend**
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-000000?style=flat-square&logo=threedotjs&logoColor=white)
 
-### 3. Start Development Server
-```bash
-npm run dev
-```
-The application will launch at `http://localhost:3000`.
-
-### 4. Code Quality & Linting
-```bash
-npm run lint
-```
-
-### 5. Production Build
-```bash
-npm run build
-```
-Generates optimized, treeshaken static assets in the `dist/` directory.
-
----
-
-## 📁 Directory Structure
-
-```text
-├── index.html                  # HTML entry point with baseline meta & font definitions
-├── metadata.json               # Platform configuration and permissions
-├── package.json                # Project dependencies and script runner
-├── README.md                   # Project documentation
-├── src/
-│   ├── App.tsx                 # Main application shell, routing configuration, layout
-│   ├── main.tsx                # React DOM root mounting
-│   ├── index.css               # Global Tailwind CSS import
-│   ├── types.ts                # Centralized TypeScript models and domain interfaces
-│   ├── components/             # Reusable UI modules
-│   │   ├── AlabsgoldLogo.tsx          # Custom architectural 'A' monogram & studio wordmark
-│   │   ├── ArchitectureSimulator.tsx  # Interactive visual dataflow simulator
-│   │   ├── CaseStudiesSection.tsx     # Deep-dive engineering breakdowns
-│   │   ├── FaqSection.tsx             # Collapsible FAQ accordion with category filter
-│   │   ├── Footer.tsx                 # Studio navigation, presence hub, direct desks
-│   │   ├── Hero.tsx                   # Studio headline, verified metrics, proof badges
-│   │   ├── IntakeModal.tsx            # Floating modal for fast project intake scoping
-│   │   ├── InteractiveProjectTimeline.tsx # Framer Motion interactive development stages timeline
-│   │   ├── Navbar.tsx                 # Responsive header with route links and CTA
-│   │   ├── ProcessSection.tsx         # 5-phase delivery breakdown & boundary rules
-│   │   ├── ScrollProgressBar.tsx      # Fixed 2px gold scroll progress indicator
-│   │   ├── ServicesSection.tsx        # 3 service pillars overview
-│   │   └── TechStackSection.tsx       # Filterable battle-tested primitives
-│   ├── data/
-│   │   ├── content.ts          # Authentic single-source-of-truth content and records
-│   │   └── timelineData.ts     # Stages, tiers, deliverables & code artifacts for timeline
-│   ├── hooks/
-│   │   └── useSEO.ts           # Dynamic SEO, Open Graph & JSON-LD hook
-│   └── pages/                  # Route-level page components
-│       ├── AboutPage.tsx       # Studio mission, philosophy & invariants
-│       ├── ContactPage.tsx     # Scoping intake form, WhatsApp link & FAQs
-│       ├── FounderPage.tsx     # Alabi Emmanuel profile, experience & credentials
-│       ├── HomePage.tsx        # Core landing overview
-│       ├── ProductsPage.tsx    # Selected works, platforms, and R&D labs
-│       └── ServicesPage.tsx    # Detailed service pillars & dual-currency pricing
-```
+**Infra & tools**
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/Ubuntu_VPS-E95420?style=flat-square&logo=ubuntu&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)
+![Paystack](https://img.shields.io/badge/Paystack-00C3F7?style=flat-square&logoColor=white)
+![Gemini](https://img.shields.io/badge/Gemini_AI-8E75B2?style=flat-square&logo=googlegemini&logoColor=white)
+![Atlassian Forge](https://img.shields.io/badge/Atlassian_Forge-0052CC?style=flat-square&logo=atlassian&logoColor=white)
 
 ---
 
-## 📬 Contact & Studio Desks
+## 📊 GitHub Activity
 
-* **Founder & Lead Engineer:** Alabi Emmanuel (Alabsgold)
-* **Direct Studio Email:** [hello@alabsgold.com.ng](mailto:hello@alabsgold.com.ng)
-* **Personal / Secondary Email:** [emmaalabi31@gmail.com](mailto:emmaalabi31@gmail.com)
-* **WhatsApp Intake:** [+234 703 996 0964 (07039960964)](https://wa.me/2347039960964?text=Hi%20Emmanuel,%20I%20saw%20the%20ALABSGOLD%20site%20and%20I'd%20like%20to%20discuss%20a%20project.)
-* **Studio Base:** Lagos, Nigeria (WAT / GMT+1) · Available for worldwide client engagements
+<div align="center">
+
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=Alabsgold&show_icons=true&count_private=true&hide_border=true&theme=tokyonight" alt="GitHub stats" />
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Alabsgold&layout=compact&hide_border=true&theme=tokyonight" alt="Top languages" />
+
+<img src="https://streak-stats.demolab.com?user=Alabsgold&hide_border=true&theme=tokyonight" alt="GitHub streak" />
+
+</div>
 
 ---
 
-## ⚖️ License
+## 📬 Work With Me
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Need a platform that wins over international buyers, a payment flow that verifies itself, or a backend that holds up under load?
+
+- 🏛️ **Studio:** [alabsgold.vercel.app](https://alabsgold.vercel.app)
+- ✉️ **Work email:** [femi.alabi@alabsgold.site](mailto:femi.alabi@alabsgold.site)
+- 📧 **Personal:** [emmaalabi31@gmail.com](mailto:emmaalabi31@gmail.com)
+- 💬 **WhatsApp:** [+234 703 996 0964](https://wa.me/2347039960964)
+- ⏱️ **Response time:** within 24 hours, Mon–Sat
+
+<div align="center"><sub>Built with care in Lagos 🇳🇬 · © ALABSGOLD</sub></div>
