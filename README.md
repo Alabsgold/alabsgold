@@ -3,10 +3,12 @@
 # Hi, I'm Emmanuel Alabi 👋
 
 ### Founder & Lead Systems Engineer at **[ALABSGOLD](https://alabsgold.vercel.app)**
-**Backend-focused software engineer · Python & TypeScript · APIs, automation & system architecture**
+**Backend systems that move orders and money across borders.**
+
+Backend-focused software engineer · Python & TypeScript · APIs, payments & system architecture
 
 [![Studio Website](https://img.shields.io/badge/ALABSGOLD-Studio_Website-d4a017?style=for-the-badge&logo=vercel&logoColor=white)](https://alabsgold.vercel.app)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-111111?style=for-the-badge&logo=googlechrome&logoColor=white)](https://emmanuel-alabi-portfolio.vercel.app)
+[![3D Portfolio](https://img.shields.io/badge/3D_Portfolio-Visit-07090d?style=for-the-badge&logo=threedotjs&logoColor=e3b54f)](https://emmanuel-alabi-portfolio.vercel.app)
 [![Work Email](https://img.shields.io/badge/Work-femi.alabi@alabsgold.site-ea4335?style=for-the-badge&logo=maildotru&logoColor=white)](mailto:femi.alabi@alabsgold.site)
 [![Gmail](https://img.shields.io/badge/Gmail-emmaalabi31@gmail.com-ea4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:emmaalabi31@gmail.com)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-Start_a_project-25d366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/2347039960964?text=Hi%20Emmanuel,%20I%20saw%20your%20GitHub%20and%20I'd%20like%20to%20discuss%20a%20project.)
@@ -38,9 +40,10 @@
 
 | Project | What it does | Stack |
 | :--- | :--- | :--- |
-| **[DPT Pay System](https://github.com/Alabsgold/DPT-pay-system)** · [live](https://dpt-pay-system.vercel.app) | Departmental dues & payments platform. Students pay through Paystack with automatic verification, replacing "send a screenshot as proof". 333 backend tests, CI on every push. *NACOS National Build Challenge.* | Django · DRF · React · Paystack |
+| **[DPT Pay System](https://github.com/Alabsgold/DPT-pay-system)** | Departmental dues & payments platform. Students pay through Paystack with automatic verification, replacing "send a screenshot as proof". 333 backend tests, CI on every push. *NACOS National Build Challenge.* | Django · DRF · React · Paystack |
+| **[3D Portfolio](https://github.com/Alabsgold/emmanuel-alabi-portfolio)** · [live](https://emmanuel-alabi-portfolio.vercel.app) | This portfolio: a 3D "systems world" where a gold core wired to my stack (Next.js, Django, PostgreSQL, Paystack, WhatsApp, Nginx) runs data pulses while the camera flies through it on scroll. Scales down on phones and slow devices. | Three.js · React Three Fiber · Next.js |
 | **[EX-AMS](https://github.com/Alabsgold/ex_digital_2)** | Real-time university attendance system with barcode/QR scanning, live attendance streaming and role-based access. *NACOS 2025/26 Hackathon, Team EX-Coders.* | FastAPI · PostgreSQL · Redis · SSE · Docker |
-| **[NIRA-XT Guardian 2](https://github.com/Alabsgold/NIRA-XT_Guardian_2)** · [live](https://nira-xt-guardian-2.vercel.app) | DNS-level threat protection and parental control. Uses Gemini AI to score unknown domains in real time against zero-day phishing and malware. | TypeScript · Gemini AI · DNS |
+| **[NIRA-XT Guardian 2](https://github.com/Alabsgold/NIRA-XT_Guardian_2)** | DNS-level threat protection and parental control. Uses Gemini AI to score unknown domains in real time against zero-day phishing and malware. | TypeScript · Gemini AI · DNS |
 | **[X-DNS Guardian+](https://github.com/Alabsgold/X-DNS-GUARDIAN)** | Real-time DNS metadata scanner and 0–100 risk scorer for the `.ng` namespace. Flags fast-flux TTLs, phishing keywords and missing SSL. | TypeScript · DNS · RDAP/WHOIS |
 | **[Hand Tracker X](https://github.com/Alabsgold/hand_tracker_x)** · [live](https://handtrackerx.vercel.app) | In-browser 3D hand tracking rendered as a neon hologram, with gesture recognition and a filtered kinematics engine. Video never leaves the device. | React · MediaPipe · Three.js |
 | **[Freshvena Glow](https://github.com/Alabsgold/freshvena_web)** | Digital storefront for a Nigerian premium food exporter serving buyers in the USA, UK, Canada and Europe. | React · TypeScript · Tailwind · shadcn/ui |
@@ -101,10 +104,10 @@
 
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=Alabsgold&show_icons=true&count_private=true&hide_border=true&theme=tokyonight" alt="GitHub stats" />
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Alabsgold&layout=compact&hide_border=true&theme=tokyonight" alt="Top languages" />
+<img height="165" src="https://github-readme-stats.vercel.app/api?username=Alabsgold&show_icons=true&count_private=true&hide_border=true&bg_color=07090d&title_color=e3b54f&icon_color=e3b54f&text_color=ece8df" alt="GitHub stats" />
+<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Alabsgold&layout=compact&hide_border=true&bg_color=07090d&title_color=e3b54f&text_color=ece8df" alt="Top languages" />
 
-<img src="https://streak-stats.demolab.com?user=Alabsgold&hide_border=true&theme=tokyonight" alt="GitHub streak" />
+<img src="https://streak-stats.demolab.com?user=Alabsgold&hide_border=true&background=07090D&ring=E3B54F&fire=E3B54F&currStreakLabel=E3B54F&sideNums=ECE8DF&sideLabels=A3A29C&currStreakNum=ECE8DF&dates=A3A29C" alt="GitHub streak" />
 
 </div>
 
@@ -114,7 +117,7 @@
 
 Need a platform that wins over international buyers, a payment flow that verifies itself, or a backend that holds up under load?
 
-- 🌐 **Portfolio & blog:** [emmanuel-alabi-portfolio.vercel.app](https://emmanuel-alabi-portfolio.vercel.app)
+- 🌐 **3D portfolio & blog:** [emmanuel-alabi-portfolio.vercel.app](https://emmanuel-alabi-portfolio.vercel.app)
 - 🏛️ **Studio:** [alabsgold.vercel.app](https://alabsgold.vercel.app)
 - ✉️ **Work email:** [femi.alabi@alabsgold.site](mailto:femi.alabi@alabsgold.site)
 - 📧 **Personal:** [emmaalabi31@gmail.com](mailto:emmaalabi31@gmail.com)
